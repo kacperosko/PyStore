@@ -1,0 +1,9 @@
+# Project exclude paths
+/apps/static/Typescript/AddDiscount.js
+/apps/static/Typescript/AddProduct.js
+/apps/static/Typescript/ChangeProductQuantity.js
+/apps/static/Typescript/GetCartProducts.js
+/apps/static/Typescript/LightDarkMode.js
+/apps/static/Typescript/RemoveProduct.js
+/apps/static/Typescript/SubtotalTabEmpty.js
+/apps/static/Typescript/TotalPriceDiscount.js

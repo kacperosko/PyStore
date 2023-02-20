@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "@types/jquery": "^3.5.16",
+    "@types/node": "^18.11.18",
+    "tailwindcss": "^3.2.4"
+  },
+  "scripts": {
+    "tailwind-watch": "tailwindcss -i ./apps/static/src/input.css -o ./apps/static/dist/output.css --watch",
+    "tailwind-build": "tailwindcss -i ./apps/static/src/static/css/output.css --minify"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.20"
+  }
+}

@@ -1,0 +1,111 @@
+{% extends "base/base.html" %}
+{% block title %} Cart {% endblock %}
+
+{% block content %}
+<div class="flex mx-10 justify-center gap-6">
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg h-fit">
+    <table id="subtotal-tab" class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead id="subtotal-tab-head" class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th colspan="2" scope="col" class="px-6 py-3 text-center">
+                    Product
+                    <span class="sr-only">Image</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Quantity
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+
+                </th>
+            </tr>
+        </thead>
+        <tbody id="subtotal-tab-body">
+        <tr id="no-products-message" class="hidden border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-600 text-center">
+            <td colspan="5" class="p-6">
+                <div class="text-xl font-bold text-lime">You have no products yet!</div>
+                <a href="/store" class="mx-auto mt-5 w-fit cursor-pointer bg-lime dark:bg-dark-lime py-2 px-3 rounded-xl text-white flex active:translate-y-1 hover:tracking-widest">
+                    <img alt="cart " src="/static/icons/Cart.svg" class="w-5 mr-2">
+                    Go to store
+                </a>
+            </td>
+
+        </tr>
+        {% for item in cart %}
+            {% with p=item.product %}
+            <tr id="sub-product-{{ p.id }}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="w-32 p-4">
+                    <img src="{{ p.image.url }}" alt="{{ p.name }}">
+                </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white hover:underline">
+                    <a href="#">{{ p.name }}</a>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex items-center space-x-3">
+{#                        <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">#}
+{#                            <span class="sr-only">Quantity button</span>#}
+{#                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>#}
+{#                        </button>#}
+                        <div>
+                            <input id="{{ p.id }}" value="{{ item.quantity }}" oninput="this.value = this.value > 999 ? 999 : this.value < 1 ? 1 : Math.abs(this.value); ChangeProductQuantity(this.value , '{{ p.id }}')" min="1" max="999" type="number" class="bg-gray-50 w-17 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        </div>
+{#                        <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">#}
+{#                            <span class="sr-only">Quantity button</span>#}
+{#                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>#}
+{#                        </button>#}
+                    </div>
+                </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                    {{ item.price }}$
+                </td>
+                <td class="px-6 py-4">
+                    <div onclick="RemoveProduct({{ p.id }})" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline">
+                        <img src="/static/icons/Trash.png" class="w-6">
+                    </div>
+                </td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="sticky top-20 sm:rounded-lg shadow-md bg-gray-50 dark:bg-gray-700 p-6 h-fit">
+    <div class="mb-4 dark:text-white">
+        <span class="font-bold">Subtotal</span><br>
+        <span id="total-price" class="{% if total_discount %}line-through text-gray-500{% endif %} dark:text-gray-400 text-xl font-light">${{ total }}</span>
+        <span id="total_price_discount" class="text-xl font-light empty:hidden">{% if total_discount %}${{ total_discount }}{% endif %}</span>
+    </div>
+    <div class="my-4">
+        <span class="text-sm dark:text-white">Do You have a discount code?</span>
+        <div class="flex">
+            <input id="discount_input" type="text" placeholder="Write KACPER" class="focus:outline-none bg-gray-50 w-36 border border-gray-300 text-gray-900 text-sm rounded-l-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+            <button onclick="AddDiscount()" class="bg-lime dark:bg-dark-lime rounded-r-lg px-2 text-white active:scale-90">Add</button>
+        </div>
+        <div class="text-xs text-gray-700 dark:text-gray-300 mt-3">
+            <span class="hidden font-bold">Discount applied!</span><br>
+            <span id="discount_name" class="uppercase">{{ discount_name }}</span>&nbsp;<span id="discount_percentage">{% if discount_percentage %}-{{ discount_percentage }}%{% endif %}</span>
+        </div>
+    </div>
+    <div class="w-full flex justify-center mt-5">
+        <button id="checkout_button" onclick="window.location.href = '/cart/checkout'" class="disabled:opacity-75 bg-lime dark:bg-dark-lime py-2 px-3 rounded-xl text-white flex enabled:active:translate-y-2 enabled:hover:tracking-widest">
+            <img alt="shopping bag" src="/static/icons/Shopping_bag.png" class="w-6 mr-1">
+            Checkout
+        </button>
+    </div>
+</div>
+
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+<script src="/static/Typescript/ChangeProductQuantity.js"></script>
+<script src="/static/Typescript/RemoveProduct.js"></script>
+<script src="/static/Typescript/AddDiscount.js"></script>
+<script src="/static/Typescript/TotalPriceDiscount.js"></script>
+<script src="/static/Typescript/SubtotalTabEmpty.js"></script>
+{#<script src="/static/Typescript/SubtotalTabEmpty.js"></script>#}
+{% endblock javascripts %}

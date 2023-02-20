@@ -1,0 +1,81 @@
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 100;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+    font-weight: 900;
+    font-style: normal;
+}
+/* ===== Scrollbar CSS ===== */
+/*  !* Firefox *!*/
+/*  * {*/
+/*    scrollbar-width: auto;*/
+/*    scrollbar-color: #4e208c #ffffff;*/
+/*  }*/
+
+  /* Chrome, Edge, and Safari */
+  /**::-webkit-scrollbar {*/
+  /*  width: 5px;*/
+  /*}*/
+
+  /**::-webkit-scrollbar-track {*/
+  /*  background:;*/
+  /*}*/
+
+  /**::-webkit-scrollbar-thumb {*/
+  /*  background-color: #200c5c;*/
+  /*  border-radius: 10px;*/
+  /*  border: 3px none #ff0000;*/
+  /*}*/
