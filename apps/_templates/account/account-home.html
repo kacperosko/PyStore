@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% block title %} Your account {% endblock %}
+
+{% load user_info %}
+
+
+{% block content %}
+    {% include 'includes/pages-steps.html' %}
+<div>
+    <div class="mb-16 dark:text-white text-2xl font-semibold m-auto w-fit mb-4">
+        Welcome back, <span class="text-lime">{{ request.user|get_first_name }}</span>! Ready to shop 'til you drop?
+    </div>
+    <div class="w-fit grid grid-cols-2 mx-auto">
+        <a href="/account/your-orders">
+            <div class="bg-lime rounded-xl w-36 p-3 text-center transition-all">
+                <img alt="Orders List" src="/_static/icons/list_all.svg" class="w-8 h-8 m-auto">
+                <span class="text-white text-xl">Your Orders</span>
+            </div>
+        </a>
+
+    </div>
+
+
+</div>
+{% endblock content %}

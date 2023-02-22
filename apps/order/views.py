@@ -31,7 +31,7 @@ def get_carts_product_count(request):
     return JsonResponse(context, status=400)
 
 
-def add_remove_product(request):
+def remove_product(request):
     context = {}
     if is_ajax(request) and request.method == "GET":
         cart = Cart(request)
@@ -75,17 +75,31 @@ def get_discount(request):
 
 def add_discount(request):
     context = {}
+    status = 400
     if is_ajax(request) and request.method == "GET":
         cart = Cart(request)
         discount_name = request.GET.get("discount_name", "")
-        discount = Discount.objects.get(name=discount_name)
-        request.session['discount'] = {"discount_name": discount.name, "discount_percentage": float(Decimal(discount.percentage))}
+        try:
+            discount = Discount.objects.get(name=discount_name)
+            context['discount_name'] = discount.name
+            context['discount_percentage'] = discount.percentage
+            context['total'] = cart.get_total_price()
+            if 'discount' not in request.session:
+                request.session['discount'] = {"discount_name": discount.name,
+                                               "discount_percentage": float(Decimal(discount.percentage))}
+                status = 200
+            else:
+                print(401)
+                status = 401
+                context['message'] = 'Discount \"' + discount_name + '\" is already added ;)'
+        except Discount.DoesNotExist:
+            context['message'] = 'Discount \"' + discount_name + '\" wasn\'t found'
+            print(context['message'])
+            status = 402
 
-        context['discount_name'] = discount.name
-        context['discount_percentage'] = discount.percentage
-        context['total'] = cart.get_total_price()
-        return JsonResponse(context, status=200)
-    return JsonResponse({}, status=400)
+        return JsonResponse(context, status=status)
+    status = 400
+    return JsonResponse({}, status=status)
 
 
 class CartSubtotal(View):
@@ -118,8 +132,9 @@ class CartCheckout(View):
     def get(self, request):
         context = {}
         context['n'] = range(100, 900, 100)
+        year = datetime.date.today().year
+        context['years'] = [y for y in range(year, year + 11)]
         return render(request, 'cart/cart-checkout.html', context)
 
     def post(self, request):
         pass
-

@@ -18,8 +18,14 @@ def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 
-# Create your views here.
-# @login_required(login_url="/login/")
+def about_us(request):
+    return render(request, 'store/about-us.html', {})
+
+
+def blog(request):
+    return render(request, 'blog/blog-home.html', {})
+
+
 def home_page(request):
     content = {}
     p = Product.objects.get(name="Monstera Deliciosa")
@@ -31,7 +37,6 @@ class Store(View):
     def get(self, request):
         content = {}
         products = Product.objects.all()
-        products_temp = []
         for p in products:
             temp = [p.name, p.price, p.image]
             attributes = Product_Attribute.objects.all().filter(id_product=p.id)
@@ -40,24 +45,11 @@ class Store(View):
                 attr = Attribute.objects.get(id=a.id_attribute.id)
                 attributes_temp.append(attr.name)
             temp.append(attributes_temp)
-            products_temp.append(temp)
+            p.attributes = attributes_temp
+
         content['products'] = products
         # print(products_temp)
         return render(request, 'store/store.html', content)
-
-    def post(self, request):
-        pass
-
-
-class Account(LoginRequiredMixin, View):
-    login_url = '/login/'
-    redirect_field_name = 'login'
-
-    def get(self, request):
-        content = {}
-
-        # print(products_temp)
-        return render(request, 'store/account.html', content)
 
     def post(self, request):
         pass

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+	<title>
+       PyStore - {% block title %}{% endblock %}
+    </title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="/_static/img/logo_plant.png" type="image/x-icon"/>
+
+	<!-- Fonts and icons -->
+
+	<!-- CSS Files -->
+    <link rel="stylesheet" href="/_static/dist/output.css" >
+	<link rel="stylesheet" href="/_static/css/fonts.css">
+	<link rel="stylesheet" href="/_static/css/main.css">
+	<link rel="stylesheet" href="/_static/css/notification.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- Specific Page CSS goes HERE  -->
+    {% block stylesheets %}{% endblock stylesheets %}
+	<style>
+    </style>
+{#{% load custom_tags %}#}
+
+</head>
+<body class="bg-white dark:bg-dark transition-colors" onload="GetCartProducts(); if (window.location.pathname === '/cart/subtotal') CheckTableRows()">
+
+{#<div id="notificationSpace" class="">#}
+{#    <div id="notification" class="absolute w-10/12 mb-16 py-1 bottom-0 left-2/4 -translate-x-1/2 bg-green-500 z-50 rounded-lg">#}
+{#        <div class="flex mx-3 items-center">#}
+{#            <img alt="Check"  src="/_static/icons/Check.png" class="w-8 mr-2">#}
+{#            <span class="text-white text-xl">#}
+{#                Test Communicate#}
+{#            </span>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+<div id="pageMessages">
+
+</div>
+{# == START DARK MODE TOGGLE == #}
+<div class="z-50 fixed left-10 bottom-10 w-16 p-1 h-9 rounded-xl bg-neutral-white dark:bg-gray-900">
+    <div id="theme-toggle" class="rounded-full relative cursor-pointer">
+        <img id="theme_toggle_light_icon" alt="sun" src="/_static/icons/sun.png" class="w-7 absolute left-0 transition-all duration-500">
+        <img id="theme_toggle_dark_icon" alt="moon" src="/_static/icons/moon.png" class="w-7 absolute left-0 transition-all duration-500">
+    </div>
+
+</div>
+{# == END DARK MODE TOGGLE ==#}
+<div>
+	<div class="m-5 sticky top-5 z-50">
+		{% include 'includes/navigation.html' %}
+	</div>
+
+	<div>
+		{% block content %}{% endblock content %}
+	</div>
+</div>
+
+<div style="clear:both"></div>
+
+<script src="/_static/js/notification.js"></script>
+<script src="/_static/Typescript/AddProduct.js"></script>
+<script src="/_static/Typescript/LightDarkMode.js"></script>
+<script type="text/javascript">
+ window.addEventListener('click' , (e) => {
+    const target = e.target.className;
+    console.log(target);
+})
+</script>
+{% block javascripts %}
+{% endblock javascripts %}
+
+</body>
+</html>

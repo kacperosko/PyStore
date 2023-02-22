@@ -28,6 +28,7 @@ class Product(models.Model):
     date_created = models.DateField(auto_now_add=True)
 
     quantity = None
+    attributes = None
 
     class Meta:
         ordering = ('-date_created',)

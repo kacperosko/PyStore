@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.store',
     'apps.order',
     'apps.authentication',
+    'apps.account',
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -65,7 +66,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'PyStore.urls'
 LOGIN_REDIRECT_URL = "authentication"  # Route defined in home/urls.py
 # LOGOUT_REDIRECT_URL = "store"  # Route defined in store/urls.py
-TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")  # ROOT dir for templates
+TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/_templates")  # ROOT dir for _templates
 
 TEMPLATES = [
     {
@@ -153,10 +154,10 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Directory where uploaded media is saved.
 MEDIA_URL = '/media/' # Public URL at the browser
 
-STATIC_URL = '/static/'
+STATIC_URL = '/_static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'apps/static'),
+    os.path.join(BASE_DIR, 'apps/_static'),
 )
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

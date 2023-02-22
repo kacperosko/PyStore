@@ -21,7 +21,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
 @admin.register(Attribute)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('name',)\
+    list_display = ('id', 'name',)\
 
 
 @admin.register(Product_Attribute)
