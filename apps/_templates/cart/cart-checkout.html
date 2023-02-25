@@ -314,6 +314,9 @@
             </div>
             <div id="debit-card-form" class="mt-6 mx-auto w-fit hidden">
                 <input id="card-number" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                <input id="cc-number-input" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                <input id="cc-expiry-input" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                <input id="cc-cvc-input" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
                 <div class="flex gap-6 mt-6">
                     <input id="card-month" list="months" placeholder="Expire Month" class="focus:outline-none bg-gray-50 w-32 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
                         <datalist id="months">
@@ -358,4 +361,5 @@
 
 {% block javascripts %}
 <script src="/_static/Typescript/DebitCardForm.js"></script>
+<script src="/_static/Typescript/CreditCardMask.js"></script>
 {% endblock javascripts %}
