@@ -7,14 +7,14 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 dependencies
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
+#RUN apk update \
+#    && apk add postgresql-dev gcc python3-dev musl-dev
 
 # install dependencies
-COPY requirements.txt /app/requirements.txt
+COPY requirements.txt /app/
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 
 # copy project
-COPY . .
+COPY . /app/
