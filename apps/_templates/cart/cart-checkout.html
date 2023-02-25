@@ -11,30 +11,30 @@
              <div class="text-center mx-auto font-bold text-lg text-gray-800 dark:text-gray-300">Your Personal Info</div>
             <div class="flex gap-x-8">
                 <div class="my-3">
-                    <input type="text" placeholder="First Name" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-44 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                    <input name="first_name" type="text" placeholder="First Name" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-44 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
                 </div>
                 <div class="my-3">
-                    <input type="text" placeholder="Last Name" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-44 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                    <input name="last_name" type="text" placeholder="Last Name" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-44 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
                 </div>
             </div>
             <div class="my-0">
-                <input type="email" placeholder="Email" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                <input name="email" type="email" placeholder="Email" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
             </div>
             <div class="my-3">
-                <input type="tel" placeholder="Phone" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                <input name="phone" type="tel" placeholder="Phone" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
             </div>
         </div>
         <div class="w-10/12 h-1 bg-gray-500 mx-auto rounded-xl my-6"></div>
         <div>
             <div class="text-center mx-auto font-bold text-lg text-gray-800 dark:text-gray-300">Your Address</div>
             <div class="my-3">
-                <input type="text" placeholder="City" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                <input name="city" type="text" placeholder="City" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
             </div>
             <div class="my-3">
-                <input type="text" placeholder="Address" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                <input name="address" type="text" placeholder="Address" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
             </div>
             <div class="my-3 flex gap-4">
-                <input list="countries" placeholder="Country" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-60 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                <input name="country" list="countries" placeholder="Country" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-60 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
                 <datalist id="countries">
                     <option value="Afghanistan"></option>
                     <option value="Albania"></option>
@@ -276,7 +276,8 @@
                     <option value="Zambia"></option>
                     <option value="Zimbabwe"></option>
                 </datalist>
-                <input type="text" inputmode="numeric" maxlength="6" pattern="[0-9]{2}-[0-9]{3}" placeholder="Postal Code" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-32 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+
+                <input name="postal_code" title="Postal code should have 5 digits e.g. 12-345" type="text" inputmode="numeric" maxlength="6" pattern="[0-9]{2}-[0-9]{3}" placeholder="Postal Code" class="invalid:border-red-500 invalid:dark:border-red-500 focus:outline-none bg-gray-50 w-32 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
             </div>
         </div>
     </div>
@@ -284,28 +285,28 @@
         <div class="relative h-full">
             <div id="payment-methods" class="max-w-md grid grid-cols-2 grid-rows-2 gap-2 grid-flow-col auto-cols-max">
                 <div class="">
-                <input disabled type="radio" id="mobile-payment" name="hosting" value="Mobile Payment" class="hidden peer" required>
+                <input disabled type="radio" id="mobile-payment" name="payment" value="Mobile Payment" class="hidden peer" required>
                     <label for="mobile-payment" class="justify-center w-full whitespace-nowrap flex inline-flex items-center p-3 text-gray-500 opacity-80 bg-gray-50 border border-gray-200 rounded-lg dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 dark:text-gray-400 dark:bg-gray-600 ">
                         Mobile Payment
                         <img alt="Mobile Payment" src="/_static/icons/mobile-payment.png" class="w-10 ml-3">
                     </label>
                 </div>
                 <div class="">
-                <input type="radio" id="debit-card" name="hosting" value="Debit Card" class="hidden peer" required>
+                <input type="radio" id="debit-card" name="payment" value="Debit Card" class="hidden peer" required>
                     <label for="debit-card" class="justify-center w-full whitespace-nowrap flex inline-flex items-center p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         Debit Card
                         <img alt="Credit Card" src="/_static/icons/credit-card.png" class="w-10 ml-3">
                     </label>
                 </div>
                 <div class="">
-                <input type="radio" id="cash-on-delivery" name="hosting" value="Cash On Delivery" class="hidden peer" required>
+                <input type="radio" id="cash-on-delivery" name="payment" value="Cash On Delivery" class="hidden peer" required>
                     <label for="cash-on-delivery" class="justify-center w-full whitespace-nowrap flex inline-flex items-center p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         Cash On Delivery
                         <img alt="Money" src="/_static/icons/money.png" class="w-10 ml-3">
                     </label>
                 </div>
                 <div class="">
-                <input type="radio" id="traditional-transfer" name="hosting" value="Traditional Transfer" class="hidden peer" required>
+                <input type="radio" id="traditional-transfer" name="payment" value="Traditional Transfer" class="hidden peer" required>
                     <label for="traditional-transfer" class="justify-center w-full whitespace-nowrap flex inline-flex items-center p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         Traditional Transfer
                         <img alt="Bank" src="/_static/icons/bank.png" class="w-10 ml-3">
@@ -313,33 +314,10 @@
                 </div>
             </div>
             <div id="debit-card-form" class="mt-6 mx-auto w-fit hidden">
-                <input id="card-number" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
-                <input id="cc-number-input" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
-                <input id="cc-expiry-input" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
-                <input id="cc-cvc-input" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                <input name="card_number" id="card-number" type="text" placeholder="Card Number" class="focus:outline-none bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
                 <div class="flex gap-6 mt-6">
-                    <input id="card-month" list="months" placeholder="Expire Month" class="focus:outline-none bg-gray-50 w-32 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
-                        <datalist id="months">
-                            <option value="January"></option>
-                            <option value="February"></option>
-                            <option value="March"></option>
-                            <option value="April"></option>
-                            <option value="May"></option>
-                            <option value="June"></option>
-                            <option value="July"></option>
-                            <option value="August"></option>
-                            <option value="September"></option>
-                            <option value="October"></option>
-                            <option value="November"></option>
-                            <option value="December"></option>
-                        </datalist>
-                    <input id="card-year" list="years" placeholder="Expire Year" class="focus:outline-none bg-gray-50 w-32 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
-                        <datalist id="years">
-                            {% for year in years %}
-                            <option value="{{ year }}"></option>
-                            {% endfor %}
-                        </datalist>
-                    <input id="card-cvv" type="text" maxlength="3" placeholder="CVV" class="focus:outline-none bg-gray-50 w-20 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                    <input name="card_expiry" id="cc-expiry-input" type="text" maxlength="5" placeholder="MM/YY" class="focus:outline-none bg-gray-50 w-44 mr-2.5 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+                    <input name="card_cvv" id="card-cvv" type="text" maxlength="3" placeholder="CVV" class="focus:outline-none bg-gray-50 w-44 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
                 </div>
             </div>
             <div class=" absolute bottom-0  dark:text-white text-dark-xl w-full flex px-3">
@@ -360,6 +338,6 @@
 {% endblock content %}
 
 {% block javascripts %}
-<script src="/_static/Typescript/DebitCardForm.js"></script>
-<script src="/_static/Typescript/CreditCardMask.js"></script>
+<script src="/_static/Typescript/_compiled/DebitCardForm.js"></script>
+<script src="/_static/Typescript/_compiled/CreditCardMask.js"></script>
 {% endblock javascripts %}

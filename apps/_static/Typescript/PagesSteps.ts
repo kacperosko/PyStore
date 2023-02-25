@@ -2,6 +2,8 @@
 function PagesSteps(): void {
 
     let current_url: string[] = window.location.pathname.split('/').filter(n => n);
+    if (current_url.length < 2)
+        return;
     let pages_steps = document.getElementById('pages_steps');
     console.log(current_url)
     for (let i = 0; i < current_url.length; i++) {

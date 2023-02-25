@@ -1,4 +1,4 @@
-let ccNumberInput = document.getElementById('cc-number-input'),
+let ccNumberInput = document.getElementById('card-number'),
     ccNumberPattern = /^\d{0,16}$/g,
     ccNumberSeparator = " ",
     ccNumberInputOldValue,
@@ -10,8 +10,7 @@ let ccNumberInput = document.getElementById('cc-number-input'),
     ccExpiryInputOldValue,
     ccExpiryInputOldCursor,
 
-    ccCVCInput = document.getElementById('cc-cvc-input'),
-    ccCVCPattern = /^\d{0,3}$/g,
+
 
     mask = (value, limit, separator) => {
         var output = [];

@@ -14,6 +14,7 @@ from apps.store.models import Product
 from .cart import Cart
 from .models import Discount
 from decimal import Decimal
+from .forms import CartCheckoutForm
 
 
 def is_ajax(request):
@@ -131,10 +132,13 @@ class CartCheckout(View):
 
     def get(self, request):
         context = {}
-        context['n'] = range(100, 900, 100)
-        year = datetime.date.today().year
-        context['years'] = [y for y in range(year, year + 11)]
+
         return render(request, 'cart/cart-checkout.html', context)
 
-    def post(self, request):
-        pass
+    def post(self, request): #pass
+        print(request.POST)
+        form = CartCheckoutForm(request.POST)
+        if form.is_valid():
+            print("FORM VALID!!!!!!!!!!")
+        else:
+            print(form.errors)

@@ -1,4 +1,4 @@
-var ccNumberInput = document.getElementById('cc-number-input'), ccNumberPattern = /^\d{0,16}$/g, ccNumberSeparator = " ", ccNumberInputOldValue, ccNumberInputOldCursor, ccExpiryInput = document.getElementById('cc-expiry-input'), ccExpiryPattern = /^\d{0,4}$/g, ccExpirySeparator = "/", ccExpiryInputOldValue, ccExpiryInputOldCursor, ccCVCInput = document.getElementById('cc-cvc-input'), ccCVCPattern = /^\d{0,3}$/g, mask = function (value, limit, separator) {
+var ccNumberInput = document.getElementById('card-number'), ccNumberPattern = /^\d{0,16}$/g, ccNumberSeparator = " ", ccNumberInputOldValue, ccNumberInputOldCursor, ccExpiryInput = document.getElementById('cc-expiry-input'), ccExpiryPattern = /^\d{0,4}$/g, ccExpirySeparator = "/", ccExpiryInputOldValue, ccExpiryInputOldCursor, mask = function (value, limit, separator) {
     var output = [];
     for (var i = 0; i < value.length; i++) {
         if (i !== 0 && i % limit === 0) {

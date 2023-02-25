@@ -1,5 +1,7 @@
 function PagesSteps() {
     var current_url = window.location.pathname.split('/').filter(function (n) { return n; });
+    if (current_url.length < 2)
+        return;
     var pages_steps = document.getElementById('pages_steps');
     console.log(current_url);
     for (var i = 0; i < current_url.length; i++) {
