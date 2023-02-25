@@ -11,8 +11,8 @@ def main():
     del path
 
     for ts in ts_files:
-        print("Running\n", "tsc " + ts)
-        os.system("tsc " + ts)
+        print("Running\n", "tsc " + ts + " --outDir _compiled")
+        os.system("tsc " + ts + " --outDir _compiled")
 
     print("Compiled all TypeScript files")
 
