@@ -1,20 +1,22 @@
-import datetime, json
-from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django import template
-from django.urls import reverse
-from django.contrib.auth.decorators import login_required
-from apps.authentication.models import User
-from django.views.generic import View
-from django.views.generic.list import ListView
-from django.views.generic.base import TemplateView
+import datetime
+import json
 from collections import OrderedDict
+from decimal import Decimal
+from django import template
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect, render, get_object_or_404
+from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.views.generic import View
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+
+from apps.authentication.models import User, Address
 from apps.store.models import Product
 from .cart import Cart
-from .models import Discount
-from decimal import Decimal
 from .forms import CartCheckoutForm
+from .models import Discount, Order, Order_Item
 
 
 def is_ajax(request):
@@ -105,7 +107,8 @@ def add_discount(request):
 
 class CartSubtotal(View):
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         context = {}
         # cart_products = request.session.get('cart_products', {})
         # products_temp = []
@@ -130,15 +133,24 @@ class CartSubtotal(View):
 
 class CartCheckout(View):
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         context = {}
 
         return render(request, 'cart/cart-checkout.html', context)
 
-    def post(self, request): #pass
+    @staticmethod
+    def post(request):
         print(request.POST)
         form = CartCheckoutForm(request.POST)
         if form.is_valid():
-            print("FORM VALID!!!!!!!!!!")
+            address = Address.objects.create(address=form.cleaned_data['address'], city=form.cleaned_data['city'], country=form.cleaned_data['country'], postal_code=form.cleaned_data['postal_code'],)
+            if request.user.is_authenticated:
+                user = User.objects.get(id=request.user.id)
+                user.address = address
+                user.save()
+            else:
+                user = User.objects.create(first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'], address=address)
+
         else:
             print(form.errors)
