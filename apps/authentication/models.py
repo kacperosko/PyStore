@@ -49,18 +49,25 @@ class UserManager(BaseUserManager):
         return user
 
 
+class Address(models.Model):
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    postal_code = models.CharField(max_length=6)
+
+    class Meta:
+        # ordering = ('-data_dodania',)
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
+
+
 class User(AbstractBaseUser):
-    email = models.EmailField(
-        verbose_name='email',
-        max_length=255,
-        unique=True,
-    )
+    email = models.EmailField(verbose_name='email', max_length=255, unique=True)
 
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
-    # profile_picture = models.ImageField(default='profile_pics/default_pic.png', upload_to='profile_pics')
-    # todo add rename function to uploaded pictures
     phone = models.CharField(max_length=20, blank=True, null=True)
+    address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, related_name='user_address', blank=True, null=True)
 
     is_unregistered = models.BooleanField(
         default=False)  # if client will do an order without log in then django will create placeholder user
@@ -68,27 +75,6 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)  # admin user; non super-user
     admin = models.BooleanField(default=False)  # superuser
-
-    # Group.add_to_class('description', models.CharField(max_length=180, null=True, blank=True))
-
-    # groups = models.ManyToManyField(
-    #     Group,
-    #     verbose_name='groups',
-    #     blank=True,
-    #     help_text=(
-    #         'The groups this user belongs to. A user will get all permissions '
-    #         'granted to each of their groups.'
-    #     ),
-    # )
-
-    # fieldsets = (
-    #     ('Permissions', {'fields': ('admin', 'staff', 'groups',)}),
-    #     ('Group Permissions', {
-    #         'fields': ('groups', 'user_permissions',)
-    #     }),
-    # )
-
-    # notice the absence of a "Password field", that is built in.
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []  # Email & Password are required by default.

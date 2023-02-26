@@ -27,6 +27,8 @@ class Product(models.Model):
     image = models.FileField(upload_to=file_directory_path)
     date_created = models.DateField(auto_now_add=True)
 
+    is_active = models.BooleanField(default=True, blank=False)
+
     quantity = None
     attributes = None
 
