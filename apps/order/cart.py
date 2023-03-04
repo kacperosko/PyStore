@@ -24,7 +24,6 @@ class Cart(object):
             yield item
 
     def __len__(self):
-        print([item for item in self.cart.values()])
         return sum(int(item['quantity']) for item in self.cart.values())
 
     def add(self, product, quantity=1, update_quantity=False):
@@ -32,10 +31,12 @@ class Cart(object):
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0,
                                      'price': str(product.price)}
-        if update_quantity:
+        if update_quantity == "true":
             self.cart[product_id]['quantity'] = int(quantity)
+            print("TEST_true", self.cart[product_id]['quantity'])
         else:
             self.cart[product_id]['quantity'] += int(quantity)
+            print("TEST_false", self.cart[product_id]['quantity'])
         self.save()
 
     def remove(self, product):

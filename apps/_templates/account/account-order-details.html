@@ -1,0 +1,89 @@
+{% extends "base/base.html" %}
+{% block title %} Cart {% endblock %}
+
+{% block content %}
+{% include 'includes/pages-steps.html' %}
+<div class="flex mx-10 justify-center gap-6">
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg h-fit">
+    <table id="subtotal-tab" class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead id="subtotal-tab-head" class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
+            <tr>
+                <th colspan="2" scope="col" class="px-6 py-3 text-center">
+                    Product
+                    <span class="sr-only">Image</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Quantity
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Price
+                </th>
+            </tr>
+        </thead>
+        <tbody id="subtotal-tab-body">
+        {% for item in order_items %}
+            {% with p=item.product %}
+            <tr id="sub-product-{{ p.id }}" class="bg-white border-b dark:bg-light-dark dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="w-32 p-4 text-center">
+                    <img src="{{ p.image.url }}" alt="{{ p.name }}" class="max-h-28 m-auto">
+                </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white hover:underline">
+                    <a href="#">{{ p.name }}</a>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex justify-center font-medium w-full text-gray-900 dark:text-white">
+
+                        {{ item.quantity }}
+
+                    </div>
+                </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                    ${{ item.price }}
+                </td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="flex flex-col gap-6">
+    <div class="sticky w-56 top-20 sm:rounded-lg shadow-md bg-gray-50 dark:bg-light-dark p-6 h-fit">
+        <div class="mb-4 dark:text-white">
+            <div class="font-bold">Amount</div>
+            <div class="dark:text-gray-300 text-xl font-light">${{ order.amount }}</div>
+            <div class="dark:text-gray-300 text-sm font-light">Discount included:</div>
+            <div class="font-semibold text-sm">KACPER -50%</div>
+        </div>
+        <div class="w-10/12 h-1 bg-gray-300 mx-auto rounded-xl my-2"></div>
+        <div class="mb-4 dark:text-white">
+            <div class="font-bold">Payment</div>
+            <span class="dark:text-gray-300 font-light text-red-6">Traditional Transfer</span>
+            <div class="flex">
+                <img src="/_static/icons/check-green.svg" class="w-5" alt="check icon">
+                <span class="text-lime font-bold text-">&nbsppaid  &nbsp</span>
+            </div>
+        </div>
+    </div>
+    <div class="sticky w-56 top-20 sm:rounded-lg shadow-md bg-gray-50 dark:bg-light-dark p-6 h-fit">
+        <div class="mb-4 dark:text-white">
+            <span class="font-bold">Delivery Address</span><br>
+            <div class="dark:text-gray-300 font-light">Wagnera 8/6</div>
+            <span class="dark:text-gray-300 font-light">52-129</span>
+            <span class="dark:text-gray-300 font-light">Wrocław</span>
+            <div class="dark:text-gray-300 font-light">Poland</div>
+        </div>
+    </div>
+</div>
+
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+<script src="/_static/Typescript/_compiled/ChangeProductQuantity.js"></script>
+<script src="/_static/Typescript/_compiled/RemoveProduct.js"></script>
+<script src="/_static/Typescript/_compiled/AddDiscount.js"></script>
+<script src="/_static/Typescript/_compiled/TotalPriceDiscount.js"></script>
+<script src="/_static/Typescript/_compiled/SubtotalTabEmpty.js"></script>
+{% endblock javascripts %}

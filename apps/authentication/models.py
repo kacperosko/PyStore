@@ -4,7 +4,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Group
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name=None, last_name=None, birthday=None, phone=None, password=None):
+    def create_user(self, email, first_name=None, last_name=None, phone=None, password=None):
         """
         Creates and saves a User with the given email and password.
         """
@@ -15,7 +15,6 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
-            birthday=birthday,
             phone=phone
         )
 
@@ -111,8 +110,21 @@ class User(AbstractBaseUser):
         return self.admin
 
     class Meta:
-        # ordering = ('-data_dodania',)
         verbose_name = "User"
         verbose_name_plural = "Users"
 
     objects = UserManager()
+
+
+class Unregistered_User(models.Model):
+    email = models.EmailField(verbose_name='email', max_length=255)
+
+    first_name = models.CharField(max_length=255, blank=True, null=True)
+    last_name = models.CharField(max_length=255, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, related_name='unregistered_User_address', blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Unregistered User"
+        verbose_name_plural = "Unregistered Users"
+
