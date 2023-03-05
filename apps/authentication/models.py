@@ -66,7 +66,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
-    address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, related_name='user_address', blank=True, null=True)
+    last_used_address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, related_name='user_last_used_address', blank=True, null=True)
 
     is_unregistered = models.BooleanField(
         default=False)  # if client will do an order without log in then django will create placeholder user
@@ -114,6 +114,11 @@ class User(AbstractBaseUser):
         verbose_name_plural = "Users"
 
     objects = UserManager()
+
+
+class User_Address(models.Model):
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='user_address_address', blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_address_user', blank=True, null=True)
 
 
 class Unregistered_User(models.Model):

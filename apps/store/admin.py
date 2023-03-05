@@ -6,6 +6,7 @@ from .models import Product, Category, Attribute, Product_Attribute
 class ProductInline(admin.TabularInline):
     model = Product_Attribute
 
+
 @admin.register(Product)
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'category', 'date_created')

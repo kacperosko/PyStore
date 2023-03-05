@@ -11,16 +11,16 @@
     </div>
 
     <div class="text-center text-white text-lg items-center leading-12 col-span-4 space-x-12">
-        <a href="/store" class=" ease-out duration-200 hover:font-bold hover:text-xl">Plants</a>
-        <a href="/about-us" class=" ease-out duration-200 hover:font-bold hover:text-xl">About Us</a>
-        <a href="/blog" class=" ease-out duration-200 hover:font-bold hover:text-xl">Blog</a>
+        <a href="/store" class="ease-out duration-200 hover:font-bold hover:text-xl">Plants</a>
+        <a href="/about-us" class="ease-out duration-200 hover:font-bold hover:text-xl">About Us</a>
+        <a href="/blog" class="ease-out duration-200 hover:font-bold hover:text-xl">Blog</a>
     </div>
     <div class="flex items-center justify-end mr-5">
         <div class="relative">
             <a href="/cart"><img alt="Cart" src="/_static/icons/Cart.svg" class="mx-3 w-8 hover:scale-125 ease-out duration-300"></a>
             <div id="cart-count" class="absolute right-0 top-0 -mt-1 bg-white rounded-full text-lime font-extrabold w-6 h-6 text-xs text-center leading-6 empty:hidden"></div>
         </div>
-        <a href="/account"><img alt="My Profile" src="/_static/icons/User.svg" class="mx-3 w-7 hover:scale-125 ease-out duration-300"></a>
+        <a href="/account" class="flex text-white leading-4 hover:font-bold group"><img alt="My Profile" src="/_static/icons/User.svg" class="mx-3 w-7 group-hover:scale-125 ease-out duration-300">{% if user.is_authenticated %}<span>Hello<br>{{ request.user.first_name }}</span>{% endif %}</a>
     </div>
 </div>
 {% block javascripts %}

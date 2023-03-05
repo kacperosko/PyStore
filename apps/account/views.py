@@ -11,7 +11,7 @@ def get_user_account_orders(request):
     orders = Order.objects.filter(user=request.user)
     for o in orders:
         o.amount = sum([order_item.price for order_item in Order_Item.objects.filter(order=o)])
-        print(o.payment)
+        o.date_created = o.date_created
     content['orders'] = orders
 
     # print(products_temp)
@@ -30,13 +30,13 @@ def get_user_account_order(request, order_id):
         content['order_items'] = Order_Item.objects.filter(order=order)
     else:
         content['error'] = f"We couldn't fine Order no. {order_id}"
-        return render(request, 'account/account-order-details.html', content)
+        return render(request, 'order/order-details.html', content)
 
     order.amount = sum([order_item.price for order_item in content['order_items']])
     # print("PRICE", sum([order_item.price for order_item in content['order_items']]))
     content['order'] = order
 
-    return render(request, 'account/account-order-details.html', content)
+    return render(request, 'order/order-details.html', content)
 
 
 @login_required(login_url='/login/')

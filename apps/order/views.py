@@ -135,12 +135,15 @@ class CartCheckout(View):
 
     @staticmethod
     def get(request):
-        context = {}
+        cart = Cart(request)
+        content = {}
+        content['total_discount'] = cart.get_total_price()
 
-        return render(request, 'cart/cart-checkout.html', context)
+        return render(request, 'cart/cart-checkout.html', content)
 
     @staticmethod
     def post(request):
+        content = {}
         print(request.POST)
         print(request.GET.get("discount_name", ""))
         form = CartCheckoutForm(request.POST)
@@ -169,14 +172,18 @@ class CartCheckout(View):
                                          unregistered_user=unregistered_user,
                                          discount=discount
                                          )
-
+            content['order_items'] = []
             for item in cart:
-                Order_Item.objects.create(order=order,
-                                          quantity=item['quantity'],
-                                          price=item['price'],
-                                          product=item['product']
-                                          )
+                order_item = Order_Item.objects.create(order=order,
+                                                       quantity=item['quantity'],
+                                                       price=float(item['price']),
+                                                       product=item['product']
+                                                       )
+                content['order_items'].append(order_item)
+            order.amount = sum([order_item.price for order_item in content['order_items']])
+            content['order'] = order
 
-            return render(request, 'cart/submitted.html', {'message': "SUCCESS"})
+            cart.clear()
+            return render(request, 'order/order-details.html', content)
         else:
             return render(request, 'cart/submitted.html', {'message': 'ERROR'})
