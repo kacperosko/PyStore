@@ -3,26 +3,26 @@ from apps.authentication.models import User, Address, Unregistered_User, User_Ad
 import nested_admin
 
 
-class AddressInline(nested_admin.NestedStackedInline):
-    # fields = ['address', 'city', 'postal_code', 'country']
-    model = Address
+# class AddressInline(nested_admin.NestedStackedInline):
+#     fields = ['address', 'city', 'postal_code', 'country']
+#     model = Address
 
 
-class UserInline(nested_admin.NestedStackedInline):
-    model = User
+# class UserInline(nested_admin.NestedStackedInline):
+#     model = User
 
 
-class User_AddressInline(nested_admin.NestedTabularInline):
-    model = User_Address
-    inlines = [AddressInline, UserInline]
+# class User_AddressInline(nested_admin.NestedTabularInline):
+#     model = User_Address
+#     inlines = [AddressInline, UserInline]
 
 
 @admin.register(User)
 class AuthorAdmin(nested_admin.NestedModelAdmin):
-    list_display = ('email', 'first_name', 'last_name')
-    inlines = [
-        User_AddressInline,
-    ]
+    list_display = ('email', 'first_name', 'last_name', 'last_used_address')
+    # inlines = [
+    #     User_AddressInline,
+    # ]
 
 
 @admin.register(Unregistered_User)

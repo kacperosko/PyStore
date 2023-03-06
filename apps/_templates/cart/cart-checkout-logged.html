@@ -11,11 +11,13 @@
     <div>
         <div class="text-center mx-auto font-bold text-lg text-gray-800 dark:text-gray-300">Delivery Address</div>
         <div class="group border-green-500 rounded-xl border-2 p-3 mt-6 shadow-md relative hover:text-green-500 hover:bg-green-500 transition-all duration-200">
-            <div id="user-address">{{ request.user.address.address }}</div>
-            <span id="user-postal_code">{{ request.user.address.postal_code }}</span>
-            <span id="user-city">{{ request.user.address.city }}</span>
-            <div id="user-country">{{ request.user.address.country }}</div>
+            <div id="user-address">{{ request.user.last_used_address.address }}</div>
+            <span id="user-postal_code">{{ request.user.last_used_address.postal_code }}</span>
+            <span id="user-city">{{ request.user.last_used_address.city }}</span>
+            <div id="user-country">{{ request.user.last_used_address.country }}</div>
             <div class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:block text-white text-center font-bold cursor-pointer">Change address</div>
         </div>
     </div>
+</div>
+<div class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-green-50 z-50">
 </div>
