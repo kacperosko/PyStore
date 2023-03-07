@@ -165,11 +165,15 @@ class CartCheckout(View):
                     first_name=form.cleaned_data['first_name'],
                     last_name=form.cleaned_data['last_name'],
                     address=address)
+
             try:
                 request_discount = request.session.get('discount', None)
-
+                try:
+                    request_discount = request_discount['discount_name']
+                except TypeError:
+                    request_discount = None
                 discount = Discount.objects.get(
-                    name=request_discount['discount_name'])
+                    name=request_discount)
                 amount = cart.get_total_price_discount()
             except ObjectDoesNotExist:
                 discount = None
@@ -196,7 +200,7 @@ class CartCheckout(View):
             request.session['discount'] = None
             request.session['completed_order_id'] = order.id
 
-            return HttpResponseRedirect('/cart/order/completed')
+            return HttpResponseRedirect('/cart/completed')
         else:
             form = CartCheckoutForm(None)
             return render(request, 'cart/submitted.html', {'message': form.errors})
