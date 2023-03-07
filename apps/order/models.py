@@ -1,5 +1,5 @@
 from django.db import models
-from apps.authentication.models import User, Unregistered_User
+from apps.authentication.models import User, Unregistered_User, Address
 from apps.store.models import Product
 from django.core.validators import MaxValueValidator, MinValueValidator
 from decimal import Decimal
@@ -38,7 +38,9 @@ class Order(models.Model):
     payment = models.ForeignKey(Payment, on_delete=models.DO_NOTHING, related_name='order_payment', blank=True,
                                 null=True)
     discount = models.ForeignKey(Discount, on_delete=models.DO_NOTHING, related_name='order_discount', blank=True, null=True)
-    amount = None
+    address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, related_name='order_address', blank=True, null=True)
+
+    amount = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
 
 
 class Order_Item(models.Model):

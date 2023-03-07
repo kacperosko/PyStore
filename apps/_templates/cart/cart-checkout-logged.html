@@ -1,23 +1,31 @@
 <div class="px-8">
     <div class="text-center mx-auto font-bold text-lg text-gray-800 dark:text-gray-300">Your Personal Info</div>
-        <div class="group border-green-500 rounded-xl border-2 p-3 mt-6 shadow-md relative hover:text-green-500 hover:bg-green-500 transition-all duration-200">
-            <div>{{ request.user.first_name }}</div>
-            <div>{{ request.user.last_name }}</div>
-            <div>{{ request.user.email }}</div>
-            <div>tel. {{ request.user.phone }}</div>
+        <div class="group border-green-500 rounded-xl border-2 p-3 mt-6 shadow-md relative hover:text-green-500 hover:bg-green-500 transition-all duration-200 flex flex-col">
+            <input name="first_name" value="{{ request.user.first_name }}" class="bg-transparent" readonly>
+            <input name="last_name" value="{{ request.user.last_name }}" class="bg-transparent" readonly>
+            <input name="email" value="{{ request.user.email }}" class="bg-transparent" readonly>
+            <input name="phone_temp" value="tel. {{ request.user.phone }}" class="bg-transparent" readonly>
+            <input name="phone" value="{{ request.user.phone }}" class="hidden" readonly>
             <div class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:block text-white text-center font-bold cursor-pointer">Change personal info</div>
         </div>
     <div class="w-10/12 h-1 bg-gray-500 mx-auto rounded-xl my-6"></div>
     <div>
         <div class="text-center mx-auto font-bold text-lg text-gray-800 dark:text-gray-300">Delivery Address</div>
-        <div class="group border-green-500 rounded-xl border-2 p-3 mt-6 shadow-md relative hover:text-green-500 hover:bg-green-500 transition-all duration-200">
-            <div id="user-address">{{ request.user.last_used_address.address }}</div>
-            <span id="user-postal_code">{{ request.user.last_used_address.postal_code }}</span>
-            <span id="user-city">{{ request.user.last_used_address.city }}</span>
-            <div id="user-country">{{ request.user.last_used_address.country }}</div>
-            <div class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:block text-white text-center font-bold cursor-pointer">Change address</div>
+        <div onclick="ShowAddresses('{{ request.user.id }}')" class="group flex flex-col cursor-pointer border-green-500 rounded-xl border-2 p-3 mt-6 shadow-md relative hover:text-green-500 hover:bg-green-500 transition-all duration-200">
+            <input name="address" id="user-address" value="{{ request.user.last_used_address.address }}" class="bg-transparent" readonly>
+            <input name="postal_code" id="user-postal_code" value="{{ request.user.last_used_address.postal_code }}" class="bg-transparent" readonly>
+            <input name="city" id="user-city" value="{{ request.user.last_used_address.city }}" class="bg-transparent" readonly>
+            <input name="country" id="user-country" value="{{ request.user.last_used_address.country }}" class="bg-transparent" readonly>
+            <div class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:block text-white text-center font-bold ">Change address</div>
         </div>
     </div>
 </div>
-<div class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-green-50 z-50">
+<div onclick="ModalWindow.hideWindow()" id="user-modal-bg" class="hidden h-screen w-screen bg-gray-400 opacity-80 z-40 fixed top-0 left-0 cursor-pointer"></div>
+<div id="user-modal" class="hidden fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+
 </div>
+
+{% block javascripts %}
+<script src="/_static/js/modal.js"></script>
+<script src="/_static/Typescript/_compiled/AddressesModal.js"></script>
+{% endblock javascripts %}

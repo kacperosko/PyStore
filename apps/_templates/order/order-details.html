@@ -53,8 +53,10 @@
         <div class="mb-4 dark:text-white">
             <div class="font-bold">Amount</div>
             <div class="dark:text-gray-300 text-xl font-light">${{ order.amount }}</div>
+            {% if order.discount %}
             <div class="dark:text-gray-300 text-sm font-light">Discount included:</div>
-            <div class="font-semibold text-sm">KACPER -50%</div>
+            <div class="font-semibold text-sm">{{ order.discount.name }} -{{ order.discount.percentage }}%</div>
+            {% endif %}
         </div>
         <div class="w-10/12 h-1 bg-gray-300 mx-auto rounded-xl my-2"></div>
         <div class="mb-4 dark:text-white">
@@ -69,10 +71,10 @@
     <div class="sticky w-56 top-20 sm:rounded-lg shadow-md bg-gray-50 dark:bg-light-dark p-6 h-fit">
         <div class="mb-4 dark:text-white">
             <span class="font-bold">Delivery Address</span><br>
-            <div class="dark:text-gray-300 font-light">Wagnera 8/6</div>
-            <span class="dark:text-gray-300 font-light">52-129</span>
-            <span class="dark:text-gray-300 font-light">Wrocław</span>
-            <div class="dark:text-gray-300 font-light">Poland</div>
+            <div class="dark:text-gray-300 font-light">{{ order.address.address}}</div>
+            <span class="dark:text-gray-300 font-light">{{ order.address.postal_code }}</span>
+            <span class="dark:text-gray-300 font-light">{{ order.address.city }}</span>
+            <div class="dark:text-gray-300 font-light">{{ order.address.country }}</div>
         </div>
     </div>
 </div>

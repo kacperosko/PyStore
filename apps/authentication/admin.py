@@ -32,4 +32,10 @@ class AuthorAdmin(admin.ModelAdmin):
 
 @admin.register(Address)
 class AuthorAdmin(admin.ModelAdmin):
-    list_displays = ('address', 'city', 'country', 'postal_code')
+    list_displays = ('address', 'city', 'country', 'postal_code')\
+
+
+
+@admin.register(User_Address)
+class AuthorAdmin(admin.ModelAdmin):
+    list_displays = ('address', 'user')

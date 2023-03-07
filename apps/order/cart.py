@@ -61,8 +61,9 @@ class Cart(object):
     #     return self.cart['discount']
 
     def get_total_price_discount(self):
-        discount = self.session.get('discount', {})
-        if 'discount_percentage' not in discount:
+        discount = self.session.get('discount', None)
+        print(discount)
+        if discount is None or 'discount_percentage' not in discount:
             return
         result = round(self.get_total_price() * (discount['discount_percentage'] / 100), 2)
         return result

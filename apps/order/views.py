@@ -87,7 +87,7 @@ def add_discount(request):
             context['discount_name'] = discount.name
             context['discount_percentage'] = discount.percentage
             context['total'] = cart.get_total_price()
-            if 'discount' not in request.session:
+            if 'discount' not in request.session or request.session.get('discount') is None:
                 request.session['discount'] = {"discount_name": discount.name,
                                                "discount_percentage": float(Decimal(discount.percentage))}
                 status = 200
@@ -122,9 +122,10 @@ class CartSubtotal(View):
         # print("CART", discount['discount_name'])
         context['cart'] = cart
         context['total'] = cart.get_total_price()
-        context['total_discount'] = cart.get_total_price_discount()
-        context['discount_name'] = discount['discount_name']
-        context['discount_percentage'] = int(discount['discount_percentage'])
+        if discount is not None:
+            context['total_discount'] = cart.get_total_price_discount()
+            context['discount_name'] = discount['discount_name']
+            context['discount_percentage'] = int(discount['discount_percentage'])
         return render(request, 'cart/cart-subtotal.html', context)
 
     def post(self, request):
@@ -149,28 +150,36 @@ class CartCheckout(View):
         form = CartCheckoutForm(request.POST)
         if form.is_valid():
             cart = Cart(request)
-            address = Address.objects.create(address=form.cleaned_data['address'], city=form.cleaned_data['city'],
-                                             country=form.cleaned_data['country'],
-                                             postal_code=form.cleaned_data['postal_code'], )
+
             user, unregistered_user = None, None
             if request.user.is_authenticated:
                 user = User.objects.get(id=request.user.id)
-                user.address = address
-                user.save()
+                address = user.last_used_address
             else:
-                unregistered_user = Unregistered_User.objects.create(email=form.cleaned_data['email'],
-                                                                     first_name=form.cleaned_data['first_name'],
-                                                                     last_name=form.cleaned_data['last_name'],
-                                                                     address=address)
+                address = Address.objects.create(
+                    address=form.cleaned_data['address'], city=form.cleaned_data['city'],
+                    country=form.cleaned_data['country'],
+                    postal_code=form.cleaned_data['postal_code'])
+                unregistered_user = Unregistered_User.objects.create(
+                    email=form.cleaned_data['email'],
+                    first_name=form.cleaned_data['first_name'],
+                    last_name=form.cleaned_data['last_name'],
+                    address=address)
             try:
+                request_discount = request.session.get('discount', None)
+
                 discount = Discount.objects.get(
-                    name=request.session.get('discount', {'discount_name': ""})['discount_name'])
+                    name=request_discount['discount_name'])
+                amount = cart.get_total_price_discount()
             except ObjectDoesNotExist:
                 discount = None
+                amount = cart.get_total_price()
 
             order = Order.objects.create(user=user,
                                          unregistered_user=unregistered_user,
-                                         discount=discount
+                                         discount=discount,
+                                         address=address,
+                                         amount=amount
                                          )
             content['order_items'] = []
             for item in cart:
@@ -184,6 +193,24 @@ class CartCheckout(View):
             content['order'] = order
 
             cart.clear()
-            return render(request, 'order/order-details.html', content)
+            request.session['discount'] = None
+            request.session['completed_order_id'] = order.id
+
+            return HttpResponseRedirect('/cart/order/completed')
         else:
-            return render(request, 'cart/submitted.html', {'message': 'ERROR'})
+            form = CartCheckoutForm(None)
+            return render(request, 'cart/submitted.html', {'message': form.errors})
+
+
+def get_completed_order(request):
+    content = {}
+    order_id = request.session.get('completed_order_id', None)
+    if order_id is not None:
+        order = Order.objects.get(id=order_id)
+        order_items = Order_Item.objects.filter(order=order)
+        content['order_items'] = order_items
+        content['order'] = order
+
+        return render(request, 'order/order-details.html', content)
+
+

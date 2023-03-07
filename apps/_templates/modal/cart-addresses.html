@@ -1,0 +1,11 @@
+<div class=" w-fit max-h-96 overflow-y-auto rounded-xl shadow-xl p-14 bg-gray-50 dark:bg-gray-700 my-7">
+    {% for a in addresses %}
+    <div onclick="ChooseAddress('{{ a.id }}')" class="group border-green-500 cursor-pointer rounded-xl border-2 min-w-fit w-full p-3 mt-6 shadow-md relative hover:text-green-500 hover:bg-green-500 transition-all duration-200">
+        <div class="w-fit">{{ a.address }}</div>
+        <span class="w-fit">{{ a.postal_code }}</span>
+        <span class="w-fit">{{ a.city }}</span>
+        <div class="w-fit">{{ a.country }}</div>
+        <div class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:block text-white text-center font-bold">Use this address</div>
+    </div>
+    {% endfor %}
+</div>
