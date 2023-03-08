@@ -4,3 +4,4 @@ django-cleanup
 python-decouple>=3.6
 psycopg2-binary
 django-nested-admin~=4.0.2
+whitenoise==6.4.0

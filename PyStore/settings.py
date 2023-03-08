@@ -155,8 +155,12 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Directory where uploaded media is saved.
 MEDIA_URL = '/media/' # Public URL at the browser
 
-STATIC_URL = '/_static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_URL = '/_static/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/_static'),
 )

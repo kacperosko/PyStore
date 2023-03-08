@@ -600,6 +600,10 @@ video {
   top: 50%;
 }
 
+.top-0 {
+  top: 0px;
+}
+
 .top-20 {
   top: 5rem;
 }
@@ -608,12 +612,12 @@ video {
   right: 0px;
 }
 
-.top-0 {
-  top: 0px;
-}
-
 .z-50 {
   z-index: 50;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .-z-10 {
@@ -622,10 +626,6 @@ video {
 
 .z-30 {
   z-index: 30;
-}
-
-.z-40 {
-  z-index: 40;
 }
 
 .col-span-4 {
@@ -840,6 +840,10 @@ video {
   height: 2.25rem;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-full {
   height: 100%;
 }
@@ -871,10 +875,6 @@ video {
 
 .h-36 {
   height: 9rem;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .max-h-28 {
@@ -926,6 +926,10 @@ video {
   width: 1.75rem;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .w-44 {
   width: 11rem;
 }
@@ -960,10 +964,6 @@ video {
 
 .w-80 {
   width: 20rem;
-}
-
-.w-screen {
-  width: 100vw;
 }
 
 .min-w-fit {
@@ -1181,9 +1181,18 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-gray-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 
 .bg-gray-300 {
@@ -1196,25 +1205,12 @@ video {
   background-color: rgb(242 102 139 / var(--tw-bg-opacity));
 }
 
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-
-.bg-transparent {
-  background-color: transparent;
-}
-
 .bg-gradient-to-t {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
 
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.bg-none {
-  background-image: none;
 }
 
 .from-transparent {
@@ -1648,11 +1644,6 @@ video {
   --tw-scale-x: 1.25;
   --tw-scale-y: 1.25;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group:hover .group-hover\:bg-green-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
 }
 
 .peer:checked ~ .peer-checked\:border-blue-600 {
