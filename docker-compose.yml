@@ -4,9 +4,9 @@ services:
   db:
     image: postgres
     environment:
-      - POSTGRES_DB=youtube
-      - POSTGRES_USER=youtube
-      - POSTGRES_PASSWORD=youtube123
+      - POSTGRES_DB=pystore
+      - POSTGRES_USER=pystore
+      - POSTGRES_PASSWORD=pystore
     ports:
       - "5432:5432"
   web:
