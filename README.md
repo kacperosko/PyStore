@@ -33,6 +33,9 @@ pip install -r requirements.txt
 
 
 ## Media
+
+Look for demo [here](https://pystore.pythonanywhere.com)
+
 ![alt text](https://github.com/kacperosko/PyStore/blob/master/readme_media/1.png)
 ![alt text](https://github.com/kacperosko/PyStore/blob/master/readme_media/2.png)
 ![alt text](https://github.com/kacperosko/PyStore/blob/master/readme_media/3.png)
