@@ -1,9 +1,10 @@
 {% block stylesheets %}
 {% endblock stylesheets %}
+{% load static %}
 <div class="w-full bg-lime dark:bg-dark-lime h-12 rounded-full grid grid-cols-6 content-center">
 
     <div class="justify-self-start ml-5 flex items-center cursor-pointer" onclick="window.location.href='/'">
-        <img src="/_static/img/logo_plant.png" class="w-10 h-10" alt="logo">
+        <img src="{% static '/img/logo_plant.png' %}" class="w-10 h-10" alt="logo">
         <div class="flex flex-col ml-1 leading-5 text-xl text-white">
             <span class="font-light">OSKO</span>
             <span class="font-bold">Plant</span>
@@ -17,13 +18,13 @@
     </div>
     <div class="flex items-center justify-end mr-5">
         <div class="relative">
-            <a href="/cart"><img alt="Cart" src="/_static/icons/Cart.svg" class="mx-3 w-8 hover:scale-125 ease-out duration-300"></a>
+            <a href="/cart"><img alt="Cart" src="{% static '/icons/Cart.svg' %}" class="mx-3 w-8 hover:scale-125 ease-out duration-300"></a>
             <div id="cart-count" class="absolute right-0 top-0 -mt-1 bg-white rounded-full text-lime font-extrabold w-6 h-6 text-xs text-center leading-6 empty:hidden"></div>
         </div>
-        <a href="/account" class="flex text-white leading-4 hover:font-bold group"><img alt="My Profile" src="/_static/icons/User.svg" class="mx-3 w-7 group-hover:scale-125 ease-out duration-300">{% if user.is_authenticated %}<span>Hello<br>{{ request.user.first_name }}</span>{% endif %}</a>
+        <a href="/account" class="flex text-white leading-4 hover:font-bold group"><img alt="My Profile" src="{% static '/icons/User.svg' %}" class="mx-3 w-7 group-hover:scale-125 ease-out duration-300">{% if user.is_authenticated %}<span>Hello<br>{{ request.user.first_name }}</span>{% endif %}</a>
     </div>
 </div>
 {% block javascripts %}
-<script src="/_static/Typescript/_compiled/GetCartProducts.js"></script>
+<script src="{% static '/Typescript/_compiled/GetCartProducts.js' %}"></script>
 {% endblock javascripts %}
 

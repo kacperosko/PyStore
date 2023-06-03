@@ -16,13 +16,13 @@
         <p class="text-center text-sm font-light text-dark dark:text-white">{{ p.price }}$</p>
         <ul class="list-inside ml-5 text-dark dark:text-white">
             {% for att in p.attributes %}
-            <li class="flex"><img alt="Leaf Point" src="/_static/img/leaf.png" class="w-5 mr-2 text-dark dark:text-white">{{ att }}</li>
+            <li class="flex"><img alt="Leaf Point" src="{% static '/img/leaf.png' %}" class="w-5 mr-2 text-dark dark:text-white">{{ att }}</li>
             {% endfor %}
         </ul>
 
         <button class="mt-2 cart-button z-50 active:mt-3" onclick="AddProduct('{{ p.id }}')">
 {#        <button class="mt-2 cart-button z-50 active:mt-3" onclick="Alert.success('Message','Success',{displayDuration: 3000, pos: 'top'})">#}
-            <img src="/_static/icons/Cart.svg" alt="Cart" class="mr-2 w-4">
+            <img src="{% static '/icons/Cart.svg' %}" alt="Cart" class="mr-2 w-4">
             <span class="text-white text-xs">Add to cart</span>
         </button>
 

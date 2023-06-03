@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load static %}
 {% block title %} Cart {% endblock %}
 
 {% block content %}
@@ -29,7 +30,7 @@
             <td colspan="5" class="p-6">
                 <div class="text-xl font-bold text-lime">You have no products yet!</div>
                 <a href="/store" class="mx-auto mt-5 w-fit cursor-pointer bg-lime dark:bg-dark-lime py-2 px-3 rounded-xl text-white flex active:translate-y-1 hover:tracking-widest">
-                    <img alt="cart " src="/_static/icons/Cart.svg" class="w-5 mr-2">
+                    <img alt="cart " src="{% static '/icons/Cart.svg' %}" class="w-5 mr-2">
                     Go to store
                 </a>
             </td>
@@ -64,7 +65,7 @@
                 </td>
                 <td class="px-6 py-4">
                     <div onclick="RemoveProduct({{ p.id }})" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline">
-                        <img src="/_static/icons/Trash.png" class="w-6">
+                        <img src="{% static '/icons/Trash.png' %}" class="w-6">
                     </div>
                 </td>
             </tr>
@@ -93,7 +94,7 @@
     </div>
     <div class="w-full flex justify-center mt-5">
         <button id="checkout_button" onclick="window.location.href = '/cart/checkout'" class="disabled:opacity-75 bg-lime dark:bg-dark-lime py-2 px-3 rounded-xl text-white flex enabled:active:translate-y-2 enabled:hover:tracking-widest">
-            <img alt="shopping bag" src="/_static/icons/Shopping_bag.png" class="w-6 mr-1">
+            <img alt="shopping bag" src="{% static '/icons/Shopping_bag.png' %}" class="w-6 mr-1">
             Checkout
         </button>
     </div>
@@ -103,8 +104,8 @@
 {% endblock content %}
 
 {% block javascripts %}
-<script src="/_static/Typescript/_compiled/RemoveProduct.js"></script>
-<script src="/_static/Typescript/_compiled/AddDiscount.js"></script>
-<script src="/_static/Typescript/_compiled/TotalPriceDiscount.js"></script>
-<script src="/_static/Typescript/_compiled/SubtotalTabEmpty.js"></script>
+<script src="{% static '/Typescript/_compiled/RemoveProduct.js' %}"></script>
+<script src="{% static '/Typescript/_compiled/AddDiscount.js' %}"></script>
+<script src="{% static '/Typescript/_compiled/TotalPriceDiscount.js' %}"></script>
+<script src="{% static '/Typescript/_compiled/SubtotalTabEmpty.js' %}"></script>
 {% endblock javascripts %}

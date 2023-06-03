@@ -1,6 +1,8 @@
 {% extends "base/base.html" %}
 {% block title %} Checkout {% endblock title %}
 
+{% load static %}
+
 {% block content %}
 {% include 'includes/pages-steps.html' %}
 <form method="post">
@@ -20,28 +22,28 @@
                 <input disabled type="radio" id="mobile-payment" name="payment" value="Mobile Payment" class="hidden peer" required>
                     <label for="mobile-payment" class="justify-center w-full whitespace-nowrap flex inline-flex items-center p-3 text-gray-500 opacity-80 bg-gray-50 border border-gray-200 rounded-lg dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 dark:text-gray-400 dark:bg-gray-600 ">
                         Mobile Payment
-                        <img alt="Mobile Payment" src="/_static/icons/mobile-payment.png" class="w-10 ml-3">
+                        <img alt="Mobile Payment" src="{% static '/icons/mobile-payment.png' %}" class="w-10 ml-3">
                     </label>
                 </div>
                 <div class="">
                 <input type="radio" id="debit-card" name="payment" value="Debit Card" class="hidden peer" required>
                     <label for="debit-card" class="justify-center w-full whitespace-nowrap flex inline-flex items-center p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         Debit Card
-                        <img alt="Credit Card" src="/_static/icons/credit-card.png" class="w-10 ml-3">
+                        <img alt="Credit Card" src="{% static '/icons/credit-card.png' %}" class="w-10 ml-3">
                     </label>
                 </div>
                 <div class="">
                 <input type="radio" id="cash-on-delivery" name="payment" value="Cash On Delivery" class="hidden peer" required>
                     <label for="cash-on-delivery" class="justify-center w-full whitespace-nowrap flex inline-flex items-center p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         Cash On Delivery
-                        <img alt="Money" src="/_static/icons/money.png" class="w-10 ml-3">
+                        <img alt="Money" src="{% static '/icons/money.png' %}" class="w-10 ml-3">
                     </label>
                 </div>
                 <div class="">
                 <input type="radio" id="traditional-transfer" name="payment" value="Traditional Transfer" class="hidden peer" required>
                     <label for="traditional-transfer" class="justify-center w-full whitespace-nowrap flex inline-flex items-center p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         Traditional Transfer
-                        <img alt="Bank" src="/_static/icons/bank.png" class="w-10 ml-3">
+                        <img alt="Bank" src="{% static '/icons/bank.png' %}" class="w-10 ml-3">
                     </label>
                 </div>
             </div>
@@ -59,7 +61,7 @@
                     <span id="total-price" class="dark:text-gray-300 font-light">${{ total_discount }}</span>
                 </div>
                 <button type="submit" onclick="" class="ml-auto bg-lime dark:bg-dark-lime py-2 px-3 rounded-xl text-white align-middle hover:tracking-wide transition-all flex active:translate-y-1">
-                    <img alt="Check" src="/_static/icons/Check.png" class="w-8 mr-1 my-auto">
+                    <img alt="Check" src="{% static '/icons/Check.png' %}" class="w-8 mr-1 my-auto">
                     <span class="my-auto">Complete Order</span>
                 </button>
             </div>
@@ -70,6 +72,6 @@
 {% endblock content %}
 
 {% block javascripts %}
-<script src="/_static/Typescript/_compiled/DebitCardForm.js"></script>
-<script src="/_static/Typescript/_compiled/CreditCardMask.js"></script>
+<script src="{% static '/Typescript/_compiled/DebitCardForm.js' %}"></script>
+<script src="{% static '/Typescript/_compiled/CreditCardMask.js' %}"></script>
 {% endblock javascripts %}
