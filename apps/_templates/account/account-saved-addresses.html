@@ -35,19 +35,23 @@
                 {% for a in addresses %}
                     <tr id="address-{{ p.id }}" class="bg-white border-b dark:bg-light-dark dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
-                             name
-                        </td>
-                        <td class="px-6 py-4 font-semibold text-lime text-center">
-                            {{ a.address }}
+                            <input class="text-lime bg-transparent border-b-2 border-lime text-center" value="{{ a.name }}" size="20" maxlength="20">
+{#                            {{ a.name }}#}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
-                            {{ a.city }}
+                            <textarea rows="1" class="bg-transparent border-b-2 border-lime text-center resize-y" value="" size="" maxlength="" oninput="this.parentNode.dataset.value = this.value">
+                                {{ a.address.address }}
+                            </textarea>
+{#                            {{ a.address.address }}#}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
-                            {{ a.postal_code }}
+                            {{ a.address.city }}
+                        </td>
+                        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center whitespace-nowrap">
+                            {{ a.address.postal_code }}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
-                            {{ a.country }}
+                            {{ a.address.country }}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center flex gap-2">
                             <div class="text-blue-400 fill-current hover:scale-125 cursor-pointer">
@@ -68,8 +72,8 @@
             </table>
         </div>
     </div>
-    <div class="h-screen w-screen bg-gray-400 dark:bg-gray-800 opacity-60 z-40 fixed top-0 left-0 cursor-pointer"></div>
-    <div class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+    <div id="account-address-modal-bg" class="hidden h-screen w-screen bg-gray-400 dark:bg-gray-800 opacity-60 z-40 fixed top-0 left-0 cursor-pointer"></div>
+    <div id="account-address-modal" class="hidden fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
         <div class="m-auto p-10 bg-white dark:bg-light-dark rounded-2xl dark:text-white text-center">
             <p>Are you sure you want to delete this address?</p>
             <p class="font-bold text-xl mt-3">{{ address_to_delete }} ADdresasd, paderwaskiego, warsaw -1203123 poland</p>

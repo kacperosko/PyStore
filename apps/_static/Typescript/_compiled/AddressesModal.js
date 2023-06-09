@@ -7,7 +7,6 @@ function ShowAddresses(user_id) {
             user_id: user_id
         },
         success: function (data) {
-            // modal.removeClass("hidden")
             // @ts-ignore
             ModalWindow.showWindow();
             modal_window.html(data);
@@ -44,14 +43,13 @@ function AddAddress() {
     $('#address_form').removeClass("hidden");
 }
 function SaveAddress() {
+    var name = $('#address_form_name');
     var address = $('#address_form_address');
     var postal_code = $('#address_form_postal_code');
     var city = $('#address_form_city');
     var country = $('#address_form_country');
     var postal_code_regex = /^[0-9]{2}-[0-9]{3}$/;
     if (!postal_code_regex.test(postal_code.val() + "")) {
-        console.log("POSTAL");
-        console.log(postal_code.val() + "");
         // @ts-ignore
         Alert.error('Correct example: 12-345', 'Wrong format of Postal Code ' + postal_code.val() + "", { displayDuration: 5000, pos: 'top' });
         return;
@@ -60,6 +58,7 @@ function SaveAddress() {
         type: "GET",
         url: "/ajax/saveaddress",
         data: {
+            name: name.val(),
             address: address.val(),
             postal_code: postal_code.val(),
             city: city.val(),

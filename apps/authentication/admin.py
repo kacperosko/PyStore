@@ -1,6 +1,6 @@
 from django.contrib import admin
 from apps.authentication.models import User, Address, Unregistered_User, User_Address
-import nested_admin
+# import nested_admin
 
 
 # class AddressInline(nested_admin.NestedStackedInline):
@@ -58,7 +58,7 @@ class AuthorAdmin(admin.ModelAdmin):
 # @admin.register(User_Address)
 class User_AddressAdmin(admin.ModelAdmin):
     model = User_Address
-    list_display = ('get_user', 'get_address', )
+    list_display = ('name', 'get_user', 'get_address', )
 
     @admin.display(ordering='user', description='User')
     def get_user(self, obj):

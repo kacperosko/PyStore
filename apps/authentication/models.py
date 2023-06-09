@@ -58,7 +58,6 @@ class Address(models.Model):
         return f"{self.address}, {self.city} {self.postal_code}, {self.country}"
 
     class Meta:
-        # ordering = ('-data_dodania',)
         verbose_name = "Address"
         verbose_name_plural = "Addresses"
 
@@ -121,6 +120,7 @@ class User(AbstractBaseUser):
 
 
 class User_Address(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='user_address_address', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_address_user', blank=True, null=True)
 

@@ -4,6 +4,7 @@
         <form name="add_address">
             {% csrf_token %}
             <div id="address_form" class="hidden">
+                    <div class="max-w-52"><input id="address_form_name" class="address-input" placeholder="Name"></div>
                     <div class="max-w-52"><input id="address_form_address" class="address-input" placeholder="Address" required></div>
                     <div class="max-w-52"><input id="address_form_postal_code" title="Postal code should have 5 digits e.g. 12-345" type="text" inputmode="numeric" maxlength="6" pattern="[0-9]{2}-[0-9]{3}" placeholder="Postal Code" class="address-input" required></div>
                     <div class="max-w-52"><input id="address_form_city" class="address-input" placeholder="City" required></div>

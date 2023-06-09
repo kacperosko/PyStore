@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'apps.authentication',
     'apps.account',
     'django_cleanup.apps.CleanupConfig',
-    'nested_admin',
+    # 'nested_admin',
 ]
 
 MIDDLEWARE = [

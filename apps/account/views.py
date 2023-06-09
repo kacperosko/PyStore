@@ -43,8 +43,8 @@ def get_user_account_order(request, order_id):
 def get_user_saved_addresses(request):
     content = {}
     try:
-        addresses = Address.objects.filter(id__in=User_Address.objects.values_list('address_id', flat=True).filter(user=request.user.id))
-
+        # addresses = Address.objects.filter(id__in=User_Address.objects.values_list('address_id', flat=True).filter(user=request.user.id))
+        addresses = User_Address.objects.filter(user=request.user.id)
     except ObjectDoesNotExist:
         addresses = None
         error_message = 'You do not have any saved address yet'
@@ -99,6 +99,7 @@ def save_address(request):
     content = {}
     if is_ajax(request):
         try:
+            name = request.GET.get("name")
             address = request.GET.get("address")
             postal_code = request.GET.get("postal_code")
             city = request.GET.get("city")
@@ -109,7 +110,7 @@ def save_address(request):
                                   city=city, country=country)
             new_address.save()
 
-            address_rel = User_Address(address=new_address, user=user)
+            address_rel = User_Address(name=name, address=new_address, user=user)
             address_rel.save()
 
             user.last_used_address = new_address

@@ -10,7 +10,6 @@ function ShowAddresses(user_id): void {
             user_id: user_id,
         },
         success: function( data ) {
-            // modal.removeClass("hidden")
             // @ts-ignore
             ModalWindow.showWindow()
             modal_window.html(data)
@@ -62,6 +61,7 @@ function AddAddress() {
 
 
 function SaveAddress() {
+    let name = $('#address_form_name')
     let address = $('#address_form_address')
     let postal_code = $('#address_form_postal_code')
     let city = $('#address_form_city')
@@ -85,6 +85,7 @@ function SaveAddress() {
         type:"GET",
         url: "/ajax/saveaddress",
         data:{
+            name: name.val(),
             address: address.val(),
             postal_code: postal_code.val(),
             city: city.val(),
