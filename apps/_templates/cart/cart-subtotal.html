@@ -40,7 +40,9 @@
             {% with p=item.product %}
             <tr id="sub-product-{{ p.id }}" class="bg-white border-b dark:bg-light-dark dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="w-32 p-4 text-center">
-                    <img src="{{ p.image.url }}" alt="{{ p.name }}" class="max-h-28 m-auto">
+                    <div class="min-w-min min-h-fit">
+                        <img src="{{ p.image.url }}" alt="{{ p.name }}" class="max-h-28">
+                    </div>
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white hover:underline">
                     <a href="#">{{ p.name }}</a>
@@ -65,7 +67,7 @@
                 </td>
                 <td class="px-6 py-4">
                     <div onclick="RemoveProduct({{ p.id }})" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline">
-                        <img src="{% static '/icons/Trash.png' %}" class="w-6">
+                        <img src="{% static '/icons/Trash.png' %}" class="w-6" alt="Delete product button">
                     </div>
                 </td>
             </tr>
@@ -88,8 +90,11 @@
             <button onclick="AddDiscount()" class="bg-lime dark:bg-dark-lime rounded-r-lg px-2 text-white active:scale-90">Add</button>
         </div>
         <div class="text-xs text-gray-700 dark:text-gray-300 mt-3">
-            <span class="hidden font-bold">Discount applied!</span><br>
-            <span id="discount_name" class="uppercase">{{ discount_name }}</span>&nbsp;<span id="discount_percentage">{% if discount_percentage %}-{{ discount_percentage }}%{% endif %}</span>
+            <span id="discount_applied" class="{% if not discount_name %}hidden{% endif %} font-bold">Discount applied!</span><br>
+            <div class="flex">
+                <span id="discount_name" class="uppercase">{{ discount_name }}</span>&nbsp<span id="discount_percentage">{% if discount_percentage %}-{{ discount_percentage }}%{% endif %}</span>
+                <span id="discount_delete" onclick="DeleteDiscount('{{ discount_name }} %}')" class="ml-auto cursor-pointer group {% if not discount_name %}hidden{% endif %}"><img src="{% static 'icons/close.svg' %}" class="w-4 transition-transform duration-300 group-active:scale-75" alt="Cancel button"></span>
+            </div>
         </div>
     </div>
     <div class="w-full flex justify-center mt-5">

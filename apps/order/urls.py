@@ -13,5 +13,6 @@ urlpatterns = [
     path('ajax/getcartproducts', views.get_carts_product_count, name='cart_getcartsproductcount'),
     path('ajax/removeproduct', views.remove_product, name='cart_removeproduct'),
     path('ajax/adddiscount', views.add_discount, name='cart_adddiscount'),
+    path('ajax/deletediscount', views.delete_discount, name='cart_deletediscount'),
     path('ajax/gettotaldiscount', views.get_discount, name='cart_getdiscount'),
 ]

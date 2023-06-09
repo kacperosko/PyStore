@@ -11,7 +11,7 @@ from django.core import serializers
 
 @login_required(login_url='/login/')
 def get_user_account_orders(request):
-    content = {'n': range(10)}
+    content = {}
 
     orders = Order.objects.filter(user=request.user)
     content['orders'] = orders
@@ -24,7 +24,7 @@ def get_user_account_orders(request):
 def get_user_account_order(request, order_id):
     content = {}
     try:
-        order = Order.objects.get(id=order_id)
+        order = Order.objects.get(id=order_id, user=request.user.id)
 
     except ObjectDoesNotExist:
         order = None
@@ -37,6 +37,21 @@ def get_user_account_order(request, order_id):
     content['order'] = order
 
     return render(request, 'order/order-details.html', content)
+
+
+@login_required(login_url='/login/')
+def get_user_saved_addresses(request):
+    content = {}
+    try:
+        addresses = Address.objects.filter(id__in=User_Address.objects.values_list('address_id', flat=True).filter(user=request.user.id))
+
+    except ObjectDoesNotExist:
+        addresses = None
+        error_message = 'You do not have any saved address yet'
+
+    content['addresses'] = addresses
+
+    return render(request, 'account/account-saved-addresses.html', content)
 
 
 @login_required(login_url='/login/')
@@ -74,6 +89,37 @@ def choose_address(request):
             content['address'] = data
             return JsonResponse(content, status=200)
         except ObjectDoesNotExist:
+            return JsonResponse(content, status=400)
+
+    return JsonResponse(content, status=400)
+
+
+@login_required(login_url='/login/')
+def save_address(request):
+    content = {}
+    if is_ajax(request):
+        try:
+            address = request.GET.get("address")
+            postal_code = request.GET.get("postal_code")
+            city = request.GET.get("city")
+            country = request.GET.get("country")
+
+            user = User.objects.get(id=request.user.id)
+            new_address = Address(address=address, postal_code=postal_code,
+                                  city=city, country=country)
+            new_address.save()
+
+            address_rel = User_Address(address=new_address, user=user)
+            address_rel.save()
+
+            user.last_used_address = new_address
+            user.save()
+
+            data = serializers.serialize("json", [user.last_used_address])
+            content['address'] = data
+            return JsonResponse(content, status=200)
+        except Exception as e:
+            print(f"Error during saving address\n{e}")
             return JsonResponse(content, status=400)
 
     return JsonResponse(content, status=400)

@@ -53,6 +53,63 @@ function ChooseAddress(address_id): void {
      })
 }
 
+
+function AddAddress() {
+    $('#add_address').removeClass("hover:text-green-500 hover:bg-green-500");
+    $('#add_address_msg').addClass("hidden")
+    $('#address_form').removeClass("hidden")
+}
+
+
+function SaveAddress() {
+    let address = $('#address_form_address')
+    let postal_code = $('#address_form_postal_code')
+    let city = $('#address_form_city')
+    let country = $('#address_form_country')
+
+    let postal_code_regex = /^[0-9]{2}-[0-9]{3}$/;
+
+    if (!postal_code_regex.test(postal_code.val() + "")) {
+           // @ts-ignore
+            Alert.error(
+                'Correct example: 12-345',
+                'Wrong format of Postal Code ' + postal_code.val() + "" ,
+               {displayDuration: 5000, pos: 'top'})
+        return
+        }
+
+
+
+    $.ajax(
+    {
+        type:"GET",
+        url: "/ajax/saveaddress",
+        data:{
+            address: address.val(),
+            postal_code: postal_code.val(),
+            city: city.val(),
+            country: country.val()
+        },
+        success: function( data ) {
+            // @ts-ignore
+            ModalWindow.hideWindow()
+            RefreshAddress(data.address);
+            // @ts-ignore
+            Alert.success(
+                'Delivery is closer!',
+                'Address added successful',
+                {displayDuration: 4000, pos: 'top'})
+        },
+        error: function (data){
+            // @ts-ignore
+            Alert.error(
+                'Try again',
+                'Opss something went wrong :(',
+                {displayDuration: 4000, pos: 'top'})
+        }
+     })
+}
+
 function RefreshAddress(address){
     address = JSON.parse(address)[0].fields;
     $("#user-address").val(address.address);

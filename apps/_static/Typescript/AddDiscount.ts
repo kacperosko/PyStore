@@ -1,4 +1,8 @@
 
+let discount_name = document.getElementById('discount_name');
+let discount_percentage = document.getElementById('discount_percentage');
+let discount_applied = document.getElementById('discount_applied');
+let discount_delete = document.getElementById('discount_delete');
 function AddDiscount(): void {
     let discount_input = document.getElementById('discount_input') as HTMLInputElement;
     $.ajax(
@@ -10,8 +14,6 @@ function AddDiscount(): void {
         },
         success: function(data) {
             console.log("DISCOUNT SUCCESS", data.total_discount)
-            let discount_name = document.getElementById('discount_name');
-            let discount_percentage = document.getElementById('discount_percentage');
 
             // @ts-ignore
             Alert.success(
@@ -22,6 +24,8 @@ function AddDiscount(): void {
             discount_name.innerHTML = data.discount_name;
             discount_percentage.innerHTML = "-" + data.discount_percentage + "%";
             discount_input.value = '';
+            discount_applied.classList.remove("hidden")
+            discount_delete.classList.remove("hidden")
         },
         error: function ($xhr,textStatus,errorThrown){
             console.log("ERROR : ", errorThrown);
@@ -59,8 +63,41 @@ function AddDiscount(): void {
 
 }
 
+function DeleteDiscount(){
+    $.ajax(
+    {
+        type:"GET",
+        url: "/ajax/deletediscount",
+
+        success: function(data) {
+
+            // @ts-ignore
+            Alert.success(
+                '',
+                'Discount deleted',
+                {displayDuration: 3000, pos: 'top'});
+            discount_applied.classList.add("hidden");
+            discount_delete.classList.add("hidden");
+            discount_name.innerHTML = '';
+            discount_percentage.innerHTML = '';
+
+        },
+        error: function (){
+
+            // @ts-ignore
+            Alert.warning(
+                'Deleting discount failed, try again',
+                'What a green mess :(',
+                {displayDuration: 4000, pos: 'top'});
+
+        }
+     })
+
+}
+
+
 $("#discount_input").on('keyup', function (e) {
-    if (e.key === 'Enter' || e.keyCode === 13) {
+    if (e.key === 'Enter') {
         AddDiscount();
     }
 });

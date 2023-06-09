@@ -4,15 +4,25 @@
 
 
 {% block content %}
-<div class="w-fit mb-10 grid grid-cols-2 mx-auto gap-6 justify-center sm:grid-cols-3 lg:grid-cols-4">
+    <div class="w-fit mb-10 grid grid-cols-1 mx-auto gap-6 justify-center sm:grid-cols-2 lg:grid-cols-4">
+
+{#    <div class="col-span-1 sm:col-span-2 lg:col-span-4">#}
+{#        <select>#}
+{#                <option>Plants</option>#}
+{#            </select>#}
+{#    </div>#}
+
     {% for p in products %}
-    <div class="w-60 h-80 rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark">
-        <div class="w-full mt-2">
-            <img alt="{{ p.name }}" src="{{ p.image.url }}" class="h-36 m-auto">
-        </div>
-        <h2 class="text-center font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime to-dark dark:to-white">
-            {{ p.name }}
-        </h2>
+    <div class="w-60 h-80 rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark ">
+        <a href="store/{{ p.url }}">
+            <div class="w-full mt-2">
+                <img alt="{{ p.name }}" src="{{ p.image.url }}" class="h-36 m-auto">
+            </div>
+
+            <h2 class="text-center font-bold text-transparent  bg-clip-text bg-gradient-to-r from-lime to-dark dark:to-white">
+                {{ p.name }}
+            </h2>
+        </a>
         <p class="text-center text-sm font-light text-dark dark:text-white">{{ p.price }}$</p>
         <ul class="list-inside ml-5 text-dark dark:text-white">
             {% for att in p.attributes %}
@@ -22,9 +32,11 @@
 
         <button class="mt-2 cart-button z-50 active:mt-3" onclick="AddProduct('{{ p.id }}')">
 {#        <button class="mt-2 cart-button z-50 active:mt-3" onclick="Alert.success('Message','Success',{displayDuration: 3000, pos: 'top'})">#}
-            <img src="{% static '/icons/Cart.svg' %}" alt="Cart" class="mr-2 w-4">
+            <img src="{% static '/icons/Cart.svg' %}" alt="Cart" class="mr-2 w-4 fill">
             <span class="text-white text-xs">Add to cart</span>
         </button>
+
+
 
     </div>
     {% endfor %}

@@ -57,6 +57,8 @@ def add_product_to_cart(request):
         quantity = request.GET.get("quantity", 1)
         update = str(request.GET.get("update", "false"))
         product = get_object_or_404(Product, id=product_id)
+        if not product.is_active:
+            return JsonResponse({}, status=401)
         cart.add(product=product, quantity=quantity,
                  update_quantity=update)
         counter = len(cart)
@@ -80,11 +82,14 @@ def add_discount(request):
     context = {}
     status = 400
     if is_ajax(request) and request.method == "GET":
+        if 'discount' in request.session and request.session.get('discount') is not None:
+            context['message'] = 'You already have a discount applied'
+            return JsonResponse(context, status=401)
         cart = Cart(request)
-        discount_name = request.GET.get("discount_name", "")
+        discount_name = request.GET.get("discount_name", "").upper()
         try:
             discount = Discount.objects.get(name=discount_name)
-            context['discount_name'] = discount.name
+            context['discount_name'] = discount.name.upper()
             context['discount_percentage'] = discount.percentage
             context['total'] = cart.get_total_price()
             if 'discount' not in request.session or request.session.get('discount') is None:
@@ -105,6 +110,20 @@ def add_discount(request):
     return JsonResponse({}, status=status)
 
 
+def delete_discount(request):
+    if is_ajax(request) and request.method == "GET":
+        try:
+            del request.session['discount']
+            status = 200
+        except NameError as e:
+            print(f"Error during deleting discount\n{e}")
+            status = 400
+
+        return JsonResponse({}, status=status)
+    status = 400
+    return JsonResponse({}, status=status)
+
+
 class CartSubtotal(View):
 
     @staticmethod
@@ -118,11 +137,12 @@ class CartSubtotal(View):
         #     products_temp.append(product)
         cart = Cart(request)
         # print("====",[item for item in cart])
-        discount = request.session.get('discount', {'discount_name': "", 'discount_percentage': 0})
         # print("CART", discount['discount_name'])
         context['cart'] = cart
         context['total'] = cart.get_total_price()
+        discount = request.session.get('discount')
         if discount is not None:
+            print("Discount:", discount)
             context['total_discount'] = cart.get_total_price_discount()
             context['discount_name'] = discount['discount_name']
             context['discount_percentage'] = int(discount['discount_percentage'])
@@ -137,6 +157,8 @@ class CartCheckout(View):
     @staticmethod
     def get(request):
         cart = Cart(request)
+        if len(cart) < 1:
+            return HttpResponseRedirect('/cart')
         content = {}
         content['total_discount'] = cart.get_total_price()
 
@@ -216,5 +238,5 @@ def get_completed_order(request):
         content['order'] = order
 
         return render(request, 'order/order-details.html', content)
-
-
+    else:
+        return HttpResponseRedirect('/cart')

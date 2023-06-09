@@ -1,7 +1,9 @@
 {% load static %}
 <!DOCTYPE html>
+{#<html lang="en" {% if request.session.color_theme == 'dark'%}class="dark"{% endif%}>#}
 <html lang="en">
 <head>
+{#    <script defer src="{% static '/Typescript/_compiled/LightDarkMode.js' %}"></script>#}
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 	<title>
@@ -63,17 +65,18 @@
 
 <div style="clear:both"></div>
 
-<script src="{% static '/js/notification.js' %}"></script>
-<script src="{% static '/Typescript/_compiled/AddProduct.js' %}"></script>
-<script src="{% static '/Typescript/_compiled/LightDarkMode.js' %}"></script>
-<script type="text/javascript">
- window.addEventListener('click' , (e) => {
-    const target = e.target.className;
-    console.log(target);
-})
-</script>
+</body>
+
 {% block javascripts %}
+    <script src="{% static '/Typescript/_compiled/LightDarkMode.js' %}"></script>
+    <script src="{% static '/js/notification.js' %}"></script>
+    <script src="{% static '/Typescript/_compiled/AddProduct.js' %}"></script>
+    <script type="text/javascript">
+     {#window.addEventListener('click' , (e) => {#}
+     {#   const target = e.target.className;#}
+     {#   console.log(target);})#}
+    </script>
 {% endblock javascripts %}
 
-</body>
+
 </html>

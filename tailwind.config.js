@@ -40,6 +40,17 @@ module.exports = {
         letterSpacing: '-0.01em',
         fontWeight: '500',
       }],
+      },
+      minWidth: {
+        '8': '2rem',
+      },
+      maxHeight: {
+        '9/10': '90vh',
+        '8/10': '80vh'
+      },
+      maxWidth: {
+        "52": '13rem',
+        "60": '15rem'
       }
     },
   },

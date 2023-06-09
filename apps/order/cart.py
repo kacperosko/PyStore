@@ -65,5 +65,5 @@ class Cart(object):
         print(discount)
         if discount is None or 'discount_percentage' not in discount:
             return
-        result = round(self.get_total_price() * (discount['discount_percentage'] / 100), 2)
+        result = "{:.2f}".format(round(self.get_total_price() - self.get_total_price() * (discount['discount_percentage'] / 100), 2))
         return result

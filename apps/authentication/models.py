@@ -54,6 +54,9 @@ class Address(models.Model):
     country = models.CharField(max_length=255)
     postal_code = models.CharField(max_length=6)
 
+    def __str__(self):
+        return f"{self.address}, {self.city} {self.postal_code}, {self.country}"
+
     class Meta:
         # ordering = ('-data_dodania',)
         verbose_name = "Address"
@@ -67,6 +70,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     last_used_address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, related_name='user_last_used_address', blank=True, null=True)
+    addresses = models.ManyToManyField(Address, through='User_Address')
 
     is_unregistered = models.BooleanField(
         default=False)  # if client will do an order without log in then django will create placeholder user
@@ -128,6 +132,12 @@ class Unregistered_User(models.Model):
     last_name = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, related_name='unregistered_User_address', blank=True, null=True)
+
+    def get_full_name(self):
+        return self.first_name + " " + self.last_name
+
+    def __str__(self):
+        return self.email
 
     class Meta:
         verbose_name = "Unregistered User"

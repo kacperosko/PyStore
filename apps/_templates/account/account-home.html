@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load static %}
 {% block title %} Your account {% endblock %}
 
 {% load user_info %}
@@ -10,11 +11,23 @@
     <div class="mb-16 dark:text-white text-2xl font-semibold m-auto w-fit mb-4">
         Welcome back, <span class="text-lime">{{ request.user|get_first_name }}</span>! Ready to shop 'til you drop?
     </div>
-    <div class="w-fit grid grid-cols-2 mx-auto">
+    <div class="w-fit grid grid-cols-2 mx-auto gap-6">
         <a href="/account/your-orders">
-            <div class="bg-lime rounded-xl w-36 p-3 text-center transition-all">
-                <img alt="Orders List" src="/_static/icons/list_all.svg" class="w-8 h-8 m-auto">
-                <span class="text-white text-xl">Your Orders</span>
+            <div class="bg-lime rounded-xl w-36 p-3 text-center transition-all hover:bg-opacity-80">
+{#                <img alt="Orders List" src="{% static '/icons/list_all.svg' %}" class="w-8 h-8 m-auto">#}
+                <svg class="w-8 h-8 m-auto text-white fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path>
+                </svg>
+                <span class="text-white">Order<br>History</span>
+            </div>
+        </a>
+        <a href="/account/saved-addresses">
+            <div class="bg-lime rounded-xl w-36 p-3 text-center transition-all hover:bg-opacity-80">
+{#                <img alt="Orders List" src="{% static '/icons/list_all.svg' %}" class="w-8 h-8 m-auto">#}
+                <svg class="w-8 h-8 m-auto text-white fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"></path>
+                </svg>
+                <span class="text-white">Saved Addresses</span>
             </div>
         </a>
 

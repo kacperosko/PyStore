@@ -26,6 +26,29 @@ def blog(request):
     return render(request, 'blog/blog-home.html', {})
 
 
+def set_theme(request):
+    if is_ajax(request) and request.method == "GET":
+        try:
+            color_theme = request.GET.get("color_theme", "")
+            request.session['discount'] = color_theme
+            status = 200
+        except Exception as e:
+            status = 400
+        return JsonResponse({}, status=status)
+    status = 400
+    return JsonResponse({}, status=status)
+
+
+def get_product(request, product_url):
+    content = {}
+    try:
+        content['product'] = Product.objects.get(url=product_url)
+    except ObjectDoesNotExist:
+        return render(request, 'store/index.html', content)
+
+    return render(request, 'store/product.html', content)
+
+
 def home_page(request):
     content = {}
     p = Product.objects.get(name="Monstera Deliciosa")
@@ -36,7 +59,7 @@ def home_page(request):
 class Store(View):
     def get(self, request):
         content = {}
-        products = Product.objects.all()
+        products = Product.objects.filter(is_active=True)
         for p in products:
             temp = [p.name, p.price, p.image]
             attributes = Product_Attribute.objects.all().filter(id_product=p.id)
