@@ -51,6 +51,9 @@ module.exports = {
       maxWidth: {
         "52": '13rem',
         "60": '15rem'
+      },
+      borderRadius: {
+        "1/2": '50%'
       }
     },
   },

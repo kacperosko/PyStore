@@ -3,24 +3,31 @@
 
 {% block content %}
     <div class="">
-        <div class="grid mx-auto grid-cols-2 w-fit">
+        <div class="grid mx-auto grid-cols-2 gap-6 w-fit">
             {% for post in posts %}
-            <div class="w-96 h-96 rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark">
-                <div class="h-3/5 w-full rounded-t-xl overflow-hidden mb-5">
+            <a class="w-96 h-fit rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark group cursor-pointer"
+                 href="blog/{{ post.slug }}">
+            <div>
+                <div class="h-3/5 w-full rounded-t-xl overflow-hidden mb-1">
                     <img alt="" src="{{ post.post_image.url }}" class="w-full h-full">
                 </div>
-
-                <div class="text-center mb-5">
-                    <a href="blog/{{ post.slug }}" class="relative group text-sky-600 transition after:duration-500 text-xl text-center font-bold text-dark dark:text-white w-fit
-                    after:content-[''] after:bg-lime after:absolute after:scale-x-0 after:w-full after:h-0.5 hover:after:scale-x-100 after:w-full after:transition after:left-0 after:bottom-0">
+                <p class="text-gray-500 dark:text-gray-400 text-xs ml-3 mb-1">
+                    Created on {{ post.created_on|date:'Y-m-d' }}
+                </p>
+                <div class="text-center mb-5 w-fit mx-auto px-5">
+                    <p class=" text-lg text-center font-bold text-dark dark:text-white w-fit">
                         {{ post.title}}
-                    </a>
+                    </p>
+                    <div class="group-hover:scale-x-100 bg-lime scale-x-0 w-full h-0.5 transition duration-500"></div>
                 </div>
 
-                <div class="mx-5">
-                    <div class="text-dark text-sm dark:text-white truncate-line-clamp"> {{ post.content }}</div>
+                <div class="mx-5 mb-3">
+                    <div class="text-dark text-sm dark:text-white truncate-line-clamp">
+                        {{ post.content|striptags|safe }}
+                    </div>
                 </div>
-            </div>
+                </div>
+            </a>
             {% endfor %}
         </div>
 

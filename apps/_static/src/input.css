@@ -24,6 +24,33 @@
         overflow: hidden;
         text-align: center;
     }
+    .blog-post > ol {
+        list-style-type: decimal;
+    }
+    .blog-post > ol > li {
+        @apply ml-6;
+        @apply my-5;
+    }
+    .blog-post > h1, h2, h3, h4, h5, h6 {
+        @apply my-4;
+        @apply font-bold;
+    }
+    .blog-post > h1 {
+        @apply text-xl
+    }
+    .blog-post > h2 {
+        @apply text-2xl
+    }
+    .blog-post > h3 {
+        @apply text-lg
+    }
+
+    .post-comment > li:not(:last-child) {
+        padding-bottom: 20px;
+        border-bottom: 1px solid;
+        @apply dark:border-gray-400;
+        @apply border-gray-500;
+    }
 
     .address-input{
         @apply border-b-2 border-lime py-1 px-2 max-w-52 bg-transparent mb-3

@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+{% block title %} {{ post.title }} {% endblock title %}
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+{% include 'includes/pages-steps.html' %}
+<div class="w-full flex justify-center">
+    <div class="w-2/5">
+        <img src="{{ post.post_image.url }}" class="w-full rounded-2xl mb-5 mx-auto" alt="">
+        <div class="font-bold text-2xl mx-auto text-center mb-5 dark:text-white">{{ post.title }}</div>
+        <div class="rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark p-6 mb-5">
+            <div class="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-5">
+                <div>Created on: {{ post.created_on|date:'Y-m-d' }}</div>
+                <div>Author: {{ post.author.get_full_name }}</div>
+            </div>
+            <div class="blog-post dark:text-white">
+                {% autoescape off %}
+                    {{ post.content }}
+                {% endautoescape %}
+            </div>
+        </div>
+
+        <div class="rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark p-6 mb-5">
+            <h1 class="dark:text-white font-bold text-2xl mb-6">Comments</h1>
+
+            <ul class="post-comment mb-10">
+                {% for c in comments %}
+                <li class="my-3">
+                    <div class="dark:text-white">
+                        <div class="flex justify-between">
+                            <div class="flex items-center">
+                                <div class="rounded-1/2 bg-orange-300 w-8 h-8 flex items-center justify-center overflow-hidden">
+                                    <p class="my-auto">{{ c.author|get_initials }}</p>
+{#                                    <img class="h-8" src="{{ post.post_image.url }}"> TODO After adding profile pictures for users include those here#}
+                                </div>
+                                <p class="font-bold ml-2">{{ c.author }}</p>
+                            </div>
+                            <div class="text-sm dark:text-gray-400">
+                                {{ c.created_on|date:'Y-m-d h:i'}}
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <p>
+                                {% autoescape off %}
+                                    {{ c.content }}
+                                {% endautoescape %}
+                            </p>
+                        </div>
+
+                        <div class="border-2 border-lime w-fit px-2 py-1 rounded-2xl flex mt-3 cursor-pointer group hover:bg-lime transition duration-200" onclick="console.log('comm')">
+                            <img alt="thumb up" src="{% static '/icons/like.svg' %}" class="w-4 group-hover:scale-110 group-active:scale-75 transition duration-200">
+                            <p class="ml-1 text-xs dark:text-white">{% if c.likes %}{{ c.likes }}{% endif %}</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+{#            <div>#}
+{#                <div class="bg-lime rounded-xl dark:text-white text-gray-500 w-fit mx-auto px-2 py-1 cursor-pointer hover:scale-110 active:scale-90 transition duration-200">#}
+{#                    <p>Add Comment</p>#}
+{#                </div>#}
+{#                <input name="First Name">#}
+{#            </div>#}
+
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+

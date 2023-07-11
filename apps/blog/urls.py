@@ -6,5 +6,6 @@ from apps.blog import views
 
 
 urlpatterns = [
-    path('blog', views.get_all_articles, name='blog_articles')
+    path('blog', views.get_all_posts, name='blog_posts'),
+    path('blog/<article_slug>', views.get_post, name='blog_post')
 ]
