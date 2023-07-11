@@ -16,6 +16,14 @@
         @apply duration-100;
         @apply cursor-pointer;
     }
+    .truncate-line-clamp {
+        display: -webkit-box;
+        max-width: 100%;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-align: center;
+    }
 
     .address-input{
         @apply border-b-2 border-lime py-1 px-2 max-w-52 bg-transparent mb-3

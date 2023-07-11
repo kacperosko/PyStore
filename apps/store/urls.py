@@ -9,7 +9,6 @@ urlpatterns = [
     path('', views.home_page, name='store'),
     path('store', views.Store.as_view(), name='store'),
     path('about-us', views.about_us),
-    path('blog', views.blog),
     path('store/<product_url>', views.get_product),
     path('ajax/settheme', views.set_theme, name='cart_getdiscount'),
 

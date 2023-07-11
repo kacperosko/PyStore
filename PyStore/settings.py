@@ -45,13 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'apps',
     'apps.store',
     'apps.order',
     'apps.authentication',
     'apps.account',
+    'apps.blog',
     'django_cleanup.apps.CleanupConfig',
-    # 'nested_admin',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
