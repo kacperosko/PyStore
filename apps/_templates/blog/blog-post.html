@@ -24,17 +24,22 @@
         <div class="rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark p-6 mb-5">
             <h1 class="dark:text-white font-bold text-2xl mb-6">Comments</h1>
 
+            {% if not comments %}
+                <div class="text-center">
+                    <p class="dark:text-white text-lg mb-6">Be the first who will comment ;D</p>
+                </div>
+            {% endif %}
             <ul class="post-comment mb-10">
                 {% for c in comments %}
                 <li class="my-3">
-                    <div class="dark:text-white">
+                    <div class="dark:text-white" id="comment-{{ c.id }}">
                         <div class="flex justify-between">
                             <div class="flex items-center">
                                 <div class="rounded-1/2 bg-orange-300 w-8 h-8 flex items-center justify-center overflow-hidden">
-                                    <p class="my-auto">{{ c.author|get_initials }}</p>
+                                    <p class="my-auto">{{ c.get_author_full_name|get_initials }}</p>
 {#                                    <img class="h-8" src="{{ post.post_image.url }}"> TODO After adding profile pictures for users include those here#}
                                 </div>
-                                <p class="font-bold ml-2">{{ c.author }}</p>
+                                <p class="font-bold ml-2">{{ c.get_author_full_name }}</p>
                             </div>
                             <div class="text-sm dark:text-gray-400">
                                 {{ c.created_on|date:'Y-m-d h:i'}}
@@ -48,26 +53,44 @@
                                 {% endautoescape %}
                             </p>
                         </div>
-
-                        <div class="border-2 border-lime w-fit px-2 py-1 rounded-2xl flex mt-3 cursor-pointer group hover:bg-lime transition duration-200" onclick="console.log('comm')">
+                        <input type="checkbox" id="like-{{ c.id }}" {% if c.liked_by_current_user %}checked{% endif %} class="hidden peer" required="">
+                        <label for="like-{{ c.id }}" onclick="LikeComment('{{ c.id }}')" class="peer-checked:bg-lime peer-checked:text-gray-50 border-2 border-lime w-fit px-2 py-1 rounded-2xl flex mt-3 cursor-pointer group transition duration-200">
                             <img alt="thumb up" src="{% static '/icons/like.svg' %}" class="w-4 group-hover:scale-110 group-active:scale-75 transition duration-200">
-                            <p class="ml-1 text-xs dark:text-white">{% if c.likes %}{{ c.likes }}{% endif %}</p>
-                        </div>
+                            <p id="like-count-{{ c.id }}" class="ml-1 text-xs dark:text-white">{% if c.likes %}{{ c.likes }}{% endif %}</p>
+                        </label>
                     </div>
                 </li>
                 {% endfor %}
             </ul>
 
-{#            <div>#}
-{#                <div class="bg-lime rounded-xl dark:text-white text-gray-500 w-fit mx-auto px-2 py-1 cursor-pointer hover:scale-110 active:scale-90 transition duration-200">#}
-{#                    <p>Add Comment</p>#}
-{#                </div>#}
-{#                <input name="First Name">#}
-{#            </div>#}
+            <form method="POST">
+            <h1 class="dark:text-white font-bold text-2xl mb-6">What do You think about this Post?</h1>
+            {% csrf_token %}
+                <div>
+                    <div class="flex justify-between">
+                        <input name="first_name" type="text" placeholder="First Name" class="w-[calc(50%-0.5rem)] focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.first_name }}" {% endif %}>
+                        <input name="last_name" type="text" placeholder="Last Name" class="w-[calc(50%-0.5rem)] focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.last_name }}" {% endif %}>
+                    </div>
+                    {{ form.media }}
+                    {{ form.content }}
+                    <div class="text-center w-full">
+                        <button class="mx-auto w-fit" type="submit">
+                            <div class="bg-lime mt-6 rounded-xl dark:text-white text-white px-2 py-1 cursor-pointer hover:scale-110 active:scale-90 transition duration-200">
+                                <p>Add Comment</p>
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
 
         </div>
 
     </div>
 </div>
 {% endblock content %}
-
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script src="{% static '/Typescript/_compiled/LikeComment.js' %}"></script>
+{% endblock javascripts %}

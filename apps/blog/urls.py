@@ -7,5 +7,7 @@ from apps.blog import views
 
 urlpatterns = [
     path('blog', views.get_all_posts, name='blog_posts'),
-    path('blog/<article_slug>', views.get_post, name='blog_post')
+    path('blog/<article_slug>', views.PostComment.as_view(), name='blog_post'),
+    path('ajax/likecomment', views.like_comment, name='blog_likecomment'),
+
 ]
