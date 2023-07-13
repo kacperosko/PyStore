@@ -40,7 +40,9 @@ class PostComment(View):
         comments = Comment.objects.filter(post=post)
         for c in comments:
             c.likes = CommentUserLike.objects.filter(comment=c, isliked=True).count()
-            c.liked_by_current_user = CommentUserLike.objects.filter(user=request.user, comment=c, isliked=True).exists()
+            print("TEST", c, request.user)
+            if request.user.is_authenticated:
+                c.liked_by_current_user = CommentUserLike.objects.filter(user=request.user, comment=c, isliked=True).exists()
         content = {}
         content["post"] = post
         content["comments"] = comments
