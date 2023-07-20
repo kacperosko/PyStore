@@ -13,7 +13,7 @@ STATUS = (
 class Post(models.Model):
     title = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user') #TODO change to employee model when add
     content = RichTextField()
     post_image = models.FileField(upload_to=generate_post_path, blank=True)
     updated_on = models.DateTimeField(auto_now=True)

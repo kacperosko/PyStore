@@ -755,6 +755,11 @@ video {
   margin-bottom: 1.25rem;
 }
 
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .mx-3 {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -768,11 +773,6 @@ video {
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
-}
-
-.my-auto {
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .my-0 {
@@ -834,16 +834,20 @@ video {
   margin-top: 2.5rem;
 }
 
+.-mb-4 {
+  margin-bottom: -1rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
 
 .mb-1 {
   margin-bottom: 0.25rem;
-}
-
-.ml-3 {
-  margin-left: 0.75rem;
 }
 
 .mb-5 {
@@ -926,12 +930,8 @@ video {
   margin-top: 1.75rem;
 }
 
-.mr-3 {
-  margin-right: 0.75rem;
-}
-
-.-mb-4 {
-  margin-bottom: -1rem;
+.mt-20 {
+  margin-top: 5rem;
 }
 
 .block {
@@ -970,21 +970,21 @@ video {
   height: 100vh;
 }
 
-.h-80 {
-  height: 20rem;
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-1 {
   height: 0.25rem;
 }
 
-.h-9 {
-  height: 2.25rem;
+.h-4 {
+  height: 1rem;
 }
 
-.h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
+.h-9 {
+  height: 2.25rem;
 }
 
 .h-3\/5 {
@@ -1003,10 +1003,6 @@ video {
   height: 0px;
 }
 
-.h-4 {
-  height: 1rem;
-}
-
 .h-12 {
   height: 3rem;
 }
@@ -1019,16 +1015,12 @@ video {
   height: 24rem;
 }
 
+.h-80 {
+  height: 20rem;
+}
+
 .h-36 {
   height: 9rem;
-}
-
-.h-3 {
-  height: 0.75rem;
-}
-
-.h-5 {
-  height: 1.25rem;
 }
 
 .max-h-28 {
@@ -1691,10 +1683,6 @@ video {
   text-transform: uppercase;
 }
 
-.lowercase {
-  text-transform: lowercase;
-}
-
 .leading-5 {
   line-height: 1.25rem;
 }
@@ -1875,6 +1863,11 @@ video {
   display: none;
 }
 
+.hover\:translate-x-5:hover {
+  --tw-translate-x: 1.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hover\:scale-125:hover {
   --tw-scale-x: 1.25;
   --tw-scale-y: 1.25;
@@ -1909,6 +1902,11 @@ video {
 
 .hover\:bg-opacity-80:hover {
   --tw-bg-opacity: 0.8;
+}
+
+.hover\:px-4:hover {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .hover\:font-bold:hover {
@@ -1995,6 +1993,11 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.active\:translate-y-3:active {
+  --tw-translate-y: 0.75rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .active\:scale-90:active {
   --tw-scale-x: .9;
   --tw-scale-y: .9;
@@ -2051,45 +2054,22 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.group:active .group-active\:translate-y-2 {
+  --tw-translate-y: 0.5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .group:active .group-active\:scale-75 {
   --tw-scale-x: .75;
   --tw-scale-y: .75;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.group.length .group-\[\.length\]\:block {
-  display: block;
-}
-
-.group.length-wrong .group-\[\.length-wrong\]\:block {
-  display: block;
-}
-
-.group.wrong .group-\[\.wrong\]\:block {
-  display: block;
-}
-
 .group.success .group-\[\.success\]\:block {
   display: block;
 }
 
-.group.length-success .group-\[\.length-success\]\:block {
-  display: block;
-}
-
-.group.specialnumber-success .group-\[\.specialnumber-success\]\:block {
-  display: block;
-}
-
 .group.success .group-\[\.success\]\:hidden {
-  display: none;
-}
-
-.group.length-success .group-\[\.length-success\]\:hidden {
-  display: none;
-}
-
-.group.specialnumber-success .group-\[\.specialnumber-success\]\:hidden {
   display: none;
 }
 

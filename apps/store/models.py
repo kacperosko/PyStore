@@ -40,6 +40,7 @@ class Product(models.Model):
     url = models.CharField(unique=True, max_length=255, null=True, blank=True)
     image = models.FileField(upload_to=generate_product_path)
     date_created = models.DateField(auto_now_add=True)
+    # sku = models.CharField(max_length=10, blank=False, null=False)
 
     is_active = models.BooleanField(default=True, blank=False)
 

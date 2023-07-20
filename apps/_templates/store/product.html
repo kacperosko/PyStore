@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 {% block title %} {{ product.name }} {% endblock title %}
 {% load static %}
+{% load custom_tags %}
 
 {% block stylesheets %}
 <style>
@@ -64,7 +65,58 @@
         </div>
 
     </div>
+    <div class="mx-auto w-9/12 bg-gray-50 dark:bg-light-dark p-10 rounded-2xl mt-10">
+        <div class="">
+            <h1 class="dark:text-white font-bold text-2xl mb-6">Reviews</h1>
 
+            {% if not comments %}
+                <div class="text-center">
+                    <p class="dark:text-white text-lg mb-6">Be the first who add review :)</p>
+                </div>
+            {% endif %}
+            <ul class="post-comment mb-10">
+                {% for r in reviews %}
+                <li class="my-3">
+                    <div class="dark:text-white" id="comment-{{ r.id }}">
+                        <div class="flex justify-between">
+                            <div class="flex items-center">
+                                <div class="rounded-1/2 bg-orange-300 w-8 h-8 flex items-center justify-center overflow-hidden">
+                                    <p class="my-auto">{{ r.get_author_full_name|get_initials }}</p>
+{#                                    <img class="h-8" src="{{ post.post_image.url }}"> TODO After adding profile pictures for users include those here#}
+                                </div>
+                                <p class="font-bold ml-2">{{ r.get_author_full_name }}</p>
+                            </div>
+                            <div class="text-sm dark:text-gray-400">
+                                {{ r.created_on|date:'Y-m-d h:i'}}
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <p>
+                                {{ r.content }}
+                            </p>
+                        </div>
+                        <input type="checkbox" id="like-{{ r.id }}" {% if r.liked_by_current_user %}checked{% endif %} class="hidden peer" required="">
+                        <label for="like-{{ r.id }}" onclick="LikeComment('{{ r.id }}')" class="peer-checked:bg-lime peer-checked:text-gray-50 border-2 border-lime w-fit px-2 py-1 rounded-2xl flex mt-3 cursor-pointer group transition duration-200">
+                            <img alt="thumb up" src="{% static '/icons/like.svg' %}" class="w-4 group-hover:scale-110 group-active:scale-75 transition duration-200">
+                            <p id="like-count-{{ r.id }}" class="ml-1 text-xs dark:text-white">{% if r.likes %}{{ r.likes }}{% endif %}</p>
+                        </label>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div class="group w-fit col-span-2 mx-auto" onclick="">
+                <button class=" w-full cart-button z-50 group-active:translate-y-2" >
+                    <div class="flex mx-auto">
+{#                        <img src="{% static '/icons/Cart.svg' %}" alt="Cart" class="mr-2 w-4">#}
+                        <span class="text-white text-md">Add Review</span>
+                    </div>
+                </button>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
