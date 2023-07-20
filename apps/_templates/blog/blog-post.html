@@ -67,12 +67,19 @@
             <h1 class="dark:text-white font-bold text-2xl mb-6">What do You think about this Post?</h1>
             {% csrf_token %}
                 <div>
+                    <div class="">
+                    {% if user.is_authenticated %}
+                        <p>You're commenting as <b class="text-lime">{{ request.user.get_full_name }}</b></p>
+                    {% else %}
                     <div class="flex justify-between">
                         <input name="first_name" type="text" placeholder="First Name" class="w-[calc(50%-0.5rem)] focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.first_name }}" {% endif %}>
                         <input name="last_name" type="text" placeholder="Last Name" class="w-[calc(50%-0.5rem)] focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.last_name }}" {% endif %}>
                     </div>
-                    {{ form.media }}
-                    {{ form.content }}
+                    {% endif %}
+                    </div>
+                    <textarea name="content" type="text" placeholder="Write something here..." class="mt-5 p-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required></textarea>
+{#                    {{ form.media }}#}
+{#                    {{ form.content }}#}
                     <div class="text-center w-full">
                         <button class="mx-auto w-fit" type="submit">
                             <div class="bg-lime mt-6 rounded-xl dark:text-white text-white px-2 py-1 cursor-pointer hover:scale-110 active:scale-90 transition duration-200">

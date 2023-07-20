@@ -40,7 +40,6 @@ class PostComment(View):
         comments = Comment.objects.filter(post=post)
         for c in comments:
             c.likes = CommentUserLike.objects.filter(comment=c, isliked=True).count()
-            print("TEST", c, request.user)
             if request.user.is_authenticated:
                 c.liked_by_current_user = CommentUserLike.objects.filter(user=request.user, comment=c, isliked=True).exists()
         content = {}
@@ -53,7 +52,16 @@ class PostComment(View):
     @staticmethod
     def post(request, article_slug):
         form = CommentForm(request.POST)
+        if request.method == "POST" and request.user.is_authenticated:
+            updated_data = request.POST.copy()
+            updated_data.update({
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name
+            })
+            form = CommentForm(data=updated_data)
+
         if request.method == "POST" and form.is_valid():
+
             comment = Comment(content=form.cleaned_data["content"],
                               author_first_name=form.cleaned_data["first_name"], author_last_name=form.cleaned_data["last_name"],
                               post=Post.objects.get(slug=article_slug), user=request.user if request.user.is_authenticated else None)
