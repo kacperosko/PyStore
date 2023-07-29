@@ -23,6 +23,8 @@
 
 {% block content %}
     {% include 'includes/pages-steps.html' %}
+    {% include 'modal/modal-add-review.html' %}
+
 <div class="">
     <div class="grid mx-auto w-9/12 max-w-6xl gap-6 bg-gray-50 dark:bg-light-dark p-10 rounded-2xl grid-cols-1 md:grid-cols-2 ">
         <div class="px-10 max-w-sm min-w-[200px] m-auto">
@@ -65,7 +67,7 @@
         </div>
 
     </div>
-    <div class="mx-auto w-9/12 bg-gray-50 dark:bg-light-dark p-10 rounded-2xl mt-10">
+    <div class="mx-auto w-9/12 max-w-6xl bg-gray-50 dark:bg-light-dark p-10 rounded-2xl mt-10">
         <div class="">
             <h1 class="dark:text-white font-bold text-2xl mb-6">Reviews</h1>
 
@@ -74,17 +76,25 @@
                     <p class="dark:text-white text-lg mb-6">Be the first who add review :)</p>
                 </div>
             {% endif %}
+            <div class="group w-fit col-span-2 mx-auto" onclick="">
+                <button class=" w-full cart-button z-50 group-active:translate-y-2" >
+                    <div class="flex mx-auto">
+{#                        <img src="{% static '/icons/Cart.svg' %}" alt="Cart" class="mr-2 w-4">#}
+                        <span class="text-white text-md">Add Your Review</span>
+                    </div>
+                </button>
+            </div>
             <ul class="post-comment mb-10">
-                {% for r in reviews %}
+                {% for r in "123" %}
                 <li class="my-3">
                     <div class="dark:text-white" id="comment-{{ r.id }}">
                         <div class="flex justify-between">
                             <div class="flex items-center">
                                 <div class="rounded-1/2 bg-orange-300 w-8 h-8 flex items-center justify-center overflow-hidden">
-                                    <p class="my-auto">{{ r.get_author_full_name|get_initials }}</p>
+                                    <p class="my-auto">{{ r.get_author_full_name|get_initials }}KO</p>
 {#                                    <img class="h-8" src="{{ post.post_image.url }}"> TODO After adding profile pictures for users include those here#}
                                 </div>
-                                <p class="font-bold ml-2">{{ r.get_author_full_name }}</p>
+                                <p class="font-bold ml-2">{{ r.get_author_full_name }}Kacper Osko</p>
                             </div>
                             <div class="text-sm dark:text-gray-400">
                                 {{ r.created_on|date:'Y-m-d h:i'}}
@@ -93,28 +103,31 @@
 
                         <div class="mt-2">
                             <p>
-                                {{ r.content }}
+                                {{ r.content }}Piekna roslinka <3
                             </p>
                         </div>
-                        <input type="checkbox" id="like-{{ r.id }}" {% if r.liked_by_current_user %}checked{% endif %} class="hidden peer" required="">
-                        <label for="like-{{ r.id }}" onclick="LikeComment('{{ r.id }}')" class="peer-checked:bg-lime peer-checked:text-gray-50 border-2 border-lime w-fit px-2 py-1 rounded-2xl flex mt-3 cursor-pointer group transition duration-200">
-                            <img alt="thumb up" src="{% static '/icons/like.svg' %}" class="w-4 group-hover:scale-110 group-active:scale-75 transition duration-200">
-                            <p id="like-count-{{ r.id }}" class="ml-1 text-xs dark:text-white">{% if r.likes %}{{ r.likes }}{% endif %}</p>
-                        </label>
+                        <div class="flex items-center space-x-1 mt-2">
+                            <p class="text-sm text-neutral-600 dark:text-neutral-300">4/5</p>
+                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                            <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                            </svg>
+                        </div>
                     </div>
                 </li>
                 {% endfor %}
             </ul>
-
-            <div class="group w-fit col-span-2 mx-auto" onclick="">
-                <button class=" w-full cart-button z-50 group-active:translate-y-2" >
-                    <div class="flex mx-auto">
-{#                        <img src="{% static '/icons/Cart.svg' %}" alt="Cart" class="mr-2 w-4">#}
-                        <span class="text-white text-md">Add Review</span>
-                    </div>
-                </button>
-            </div>
-
         </div>
     </div>
 </div>

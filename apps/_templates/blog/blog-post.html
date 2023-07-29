@@ -71,15 +71,29 @@
                     {% if user.is_authenticated %}
                         <p>You're commenting as <b class="text-lime">{{ request.user.get_full_name }}</b></p>
                     {% else %}
-                    <div class="flex justify-between">
-                        <input name="first_name" type="text" placeholder="First Name" class="w-[calc(50%-0.5rem)] focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.first_name }}" {% endif %}>
-                        <input name="last_name" type="text" placeholder="Last Name" class="w-[calc(50%-0.5rem)] focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.last_name }}" {% endif %}>
+                    <div class="flex justify-between relative">
+                        <div class="relative w-[calc(50%-0.5rem)]" data-te-input-wrapper-init>
+                            <input id="blog-comment-fname" name="first_name" type="text" placeholder="First Name"
+                                   class="peer leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 w-full focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.first_name }}" {% endif %}>
+                            <label
+                                for="blog-comment-fname"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-red-50 dark:bg-transparent px-2 peer-focus:px-2 peer-focus:text-lime peer-focus:dark:text-dark-lime peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                                >First Name
+                            </label>
+                        </div>
+                        <div class="relative w-[calc(50%-0.5rem)]"  data-te-input-wrapper-init>
+                            <input id="blog-comment-lname" name="last_name" type="text" placeholder="Last Name"
+                                   class="peer leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 w-full focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.last_name }}" {% endif %}>
+                            <label
+                                for="blog-comment-lname"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-red-50 dark:bg-transparent px-2 peer-focus:px-2 peer-focus:text-lime peer-focus:dark:text-dark-lime peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                                >Last Name
+                            </label>
+                        </div>
                     </div>
                     {% endif %}
                     </div>
                     <textarea name="content" type="text" placeholder="Write something here..." class="mt-5 p-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required></textarea>
-{#                    {{ form.media }}#}
-{#                    {{ form.content }}#}
                     <div class="text-center w-full">
                         <button class="mx-auto w-fit" type="submit">
                             <div class="bg-lime mt-6 rounded-xl dark:text-white text-white px-2 py-1 cursor-pointer hover:scale-110 active:scale-90 transition duration-200">
