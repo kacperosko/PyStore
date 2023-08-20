@@ -1,42 +1,62 @@
 # PyStore
-PyStore is an online store project created using the Python language and the Django framework. It has a clean and simple design, providing customers with a straightforward shopping experience.
+yStore is an open-source online store built using Python and the Django framework. It offers a clean and intuitive shopping experience, designed to simplify the process for both customers and developers.
+
+## Table of Contents
+
+* [Installation](#Installation)
+* [Features](#Features)
+* [Demo](#Demo)
+* [Screenshots](#Screenshots)
 
 ## Installation
 
-Requirements:
+### Requirements:
 + Python 3.10
 
-Download repository and install reuirements
+### Clone and Setup
+You can quickly get PyStore up and running by following these steps:
 
-```
+1. Clone the repository:
+```sh
 git clone https://github.com/kacperosko/PyStore.git
 cd PyStore
+```
+2. Install the required dependencies:
+```sh
 pip install -r requirements.txt
 ```
- Run local server
- ```
- python manage.py runserver
- ```
+3. Run local server
+  ```sh
+  python manage.py runserver
+  ```
  
- You can also use configured Dockerfile
- ```
+
+### Using Docker
+Alternatively, you can use Docker to simplify the setup:
+
+1. Build the Docker image:
+ ```sh
  docker build .
- docker-compose up
  ```
- 
+ 2. Start the application using Docker Compose:
+```sh
+ docker-compose up
+```
  ## Features
- + Handling the shopping cart stored in the session
- + User Orders history
- + Dark and light mode
- + Blog section with comments module
- + Handling discounts
+PyStore comes with a range of features to enhance your online shopping experience:
 
++ **Shopping Cart:** Seamlessly manage your shopping cart, which is stored in the session.
++ **User Orders:** Keep track of your order history.
++ **Dark and Light Mode:** Choose between dark and light themes for a personalized experience.
++ **Blog Section:** Stay informed with a blog section and a comments module.
++ **Discount Handling**: Easily apply discounts to your purchases.
 
+All components have been meticulously designed using Vertabelo to ensure the highest quality architecture.
+## Demo
+Explore a live demo of PyStore at [pystore.pythonanywhere.com](https://pystore.pythonanywhere.com)
 
-## Media
-
-Look for demo [here](https://pystore.pythonanywhere.com)
-
+## Screenshots
+Here are some snapshots of PyStore:
 ![alt text](https://github.com/kacperosko/PyStore/blob/master/readme_media/1.png)
 ![alt text](https://github.com/kacperosko/PyStore/blob/master/readme_media/2.png)
 ![alt text](https://github.com/kacperosko/PyStore/blob/master/readme_media/3.png)
