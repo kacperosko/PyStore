@@ -51,7 +51,7 @@ PyStore comes with a range of features to enhance your online shopping experienc
 + **Blog Section:** Stay informed with a blog section and a comments module.
 + **Discount Handling**: Easily apply discounts to your purchases.
 
-All components have been meticulously designed using Vertabelo to ensure the highest quality architecture.
+All components have been meticulously designed using Vertabelo to ensure the highest quality architecture. You can check the design [here](Database-Schema.png)
 ## Demo
 Explore a live demo of PyStore at [pystore.pythonanywhere.com](https://pystore.pythonanywhere.com)
 
