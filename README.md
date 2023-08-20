@@ -28,6 +28,7 @@ pip install -r requirements.txt
  + Handling the shopping cart stored in the session
  + User Orders history
  + Dark and light mode
+ + Blog section with comments module
  + Handling discounts
 
 
