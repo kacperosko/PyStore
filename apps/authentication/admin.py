@@ -26,7 +26,10 @@ class UserAdmin(admin.ModelAdmin):
 
     @admin.display(ordering='last_used_address', description='Address')
     def get_last_address(self, obj):
-        return f"{obj.last_used_address.address}, {obj.last_used_address.city} {obj.last_used_address.postal_code}"
+        if obj.last_used_address:
+            return f"{obj.last_used_address.address}, {obj.last_used_address.city} {obj.last_used_address.postal_code}"
+        else:
+            return ""
 
 
 admin.site.register(User, UserAdmin)

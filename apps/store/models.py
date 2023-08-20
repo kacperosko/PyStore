@@ -4,15 +4,16 @@ from datetime import datetime
 import os
 import re
 from django.dispatch import receiver
+from apps.models_handler.generate_file_directory import generate_product_path
 
 
-def file_directory_path(instance, filename):
-    ext = filename.split('.')[-1]
-    now = datetime.now()
-    filename = "%s_%s.%s" % (re.sub('[^a-zA-Z0-9]+', '', instance.name), now.strftime("%H%M_%d%m%Y"), ext)
-    return os.path.join('product_images',
-                        "product_{0}".format(re.sub('[^a-zA-Z0-9]+', '', instance.name)),
-                        filename)
+# def file_directory_path(instance, filename):
+#     ext = filename.split('.')[-1]
+#     now = datetime.now()
+#     filename = "%s_%s.%s" % (re.sub('[^a-zA-Z0-9]+', '', instance.name), now.strftime("%H%M_%d%m%Y"), ext)
+#     return os.path.join('product_images',
+#                         "product_{0}".format(re.sub('[^a-zA-Z0-9]+', '', instance.name)),
+#                         filename)
 
 
 # def generate_product_url(instance):
@@ -37,8 +38,9 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product_category', null=False)
     url = models.CharField(unique=True, max_length=255, null=True, blank=True)
-    image = models.FileField(upload_to=file_directory_path)
+    image = models.FileField(upload_to=generate_product_path)
     date_created = models.DateField(auto_now_add=True)
+    # sku = models.CharField(max_length=10, blank=False, null=False)
 
     is_active = models.BooleanField(default=True, blank=False)
 

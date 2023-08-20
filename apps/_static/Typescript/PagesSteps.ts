@@ -8,9 +8,10 @@ function PagesSteps(): void {
     console.log(current_url)
     for (let i = 0; i < current_url.length; i++) {
         let key = current_url.at(i);
+        let re = /-/gi
         pages_steps.innerHTML +=
             '<a href="/' + current_url.slice(0, i+1).join('/') + '" class="hover:underline">'
-            + CapitalizeEveryWord(key.replace('-', ' ')) +
+            + CapitalizeEveryWord(key.replace(re, ' ')) +
             '</a>';
         if (i != current_url.length - 1){
             pages_steps.innerHTML += '<span class="text-lime"> > </span>';

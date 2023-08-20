@@ -2,10 +2,35 @@
 {% block title %} Blog {% endblock title %}
 
 {% block content %}
-    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 dark:text-white">
-        <h1 class="text-3xl font-bold">
-            'Blog' page in progress
-        </h1>
+    <div class="">
+        <div class="grid mx-auto grid-cols-2 gap-6 w-fit">
+            {% for post in posts %}
+            <a class="w-96 h-fit rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark group cursor-pointer"
+                 href="blog/{{ post.slug }}">
+            <div>
+                <div class="h-3/5 w-full rounded-t-xl overflow-hidden mb-1">
+                    <img alt="" src="{{ post.post_image.url }}" class="w-full h-full">
+                </div>
+                <p class="text-gray-500 dark:text-gray-400 text-xs ml-3 mb-1">
+                    Created on {{ post.created_on|date:'Y-m-d' }}
+                </p>
+                <div class="text-center mb-5 w-fit mx-auto px-5">
+                    <p class=" text-lg text-center font-bold text-dark dark:text-white w-fit">
+                        {{ post.title}}
+                    </p>
+                    <div class="group-hover:scale-x-100 bg-lime scale-x-0 w-full h-0.5 transition duration-500"></div>
+                </div>
+
+                <div class="mx-5 mb-3">
+                    <div class="text-dark text-sm dark:text-white truncate-line-clamp">
+                        {{ post.content|striptags|safe }}
+                    </div>
+                </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
     </div>
 {% endblock content %}
 

@@ -1,0 +1,70 @@
+<div class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-full h-full bg-gray-400 bg-opacity-40 cursor-pointer">
+    <div class="bg-gray-50 dark:bg-light-dark w-fit h-fit absolute left-1/2 top-1/2 -translate-x-1/2 p-5 rounded-xl cursor-auto">
+        <form id="add-review-form" action="#" method="post">
+            {% csrf_token %}
+            <h1 class="text-lime font-bold">What do You think about this product?</h1>
+            <textarea name="content" type="text" placeholder="Write something here..." class="mt-5 p-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"></textarea>
+
+            <p id="stars-required" class="text-red-600 font-light text-sm w-fit mx-auto mt-3 invisible">
+                Choose stars
+            </p>
+            <div class="flex items-center space-x-1  mx-auto w-fit flex-row-reverse">
+
+                <input type="radio" id="review-star-5" name="review-star" class="hidden peer" value="5" required>
+                <label for="review-star-5"
+                        class="w-6 h-6 text-gray-300 dark:text-gray-500 peer peer-hover:text-yellow-300 hover:text-yellow-300 peer-checked:text-yellow-300">
+                    <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="review-star-4" name="review-star" class="hidden peer" value="4" required>
+                <label for="review-star-4"
+                        class="w-6 h-6 text-gray-300 dark:text-gray-500 peer peer-hover:text-yellow-300 hover:text-yellow-300 peer-checked:text-yellow-300">
+                    <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="review-star-3" name="review-star" class="hidden peer" value="3" required>
+                <label for="review-star-3"
+                        class="w-6 h-6 text-gray-300 dark:text-gray-500 peer peer-hover:text-yellow-300 hover:text-yellow-300 peer-checked:text-yellow-300">
+                    <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="review-star-2" name="review-star" class="hidden peer" value="2" required>
+                <label for="review-star-2"
+                        class="w-6 h-6 text-gray-300 dark:text-gray-500 peer peer-hover:text-yellow-300 hover:text-yellow-300 peer-checked:text-yellow-300">
+                    <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="review-star-1" name="review-star" class="hidden peer" value="1" required>
+                <label for="review-star-1"
+                        class="w-6 h-6 text-gray-300 dark:text-gray-500 peer peer-hover:text-yellow-300 hover:text-yellow-300 peer-checked:text-yellow-300">
+                    <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"></path>
+                    </svg>
+                </label>
+            </div>
+            
+            <button class=" w-fit cart-button z-50 group-active:translate-y-2 mt-4" onclick="checkIfStarsSelected();">
+                <div class="flex mx-auto">
+                    <span class="text-white text-md px-2">Save</span>
+                </div>
+            </button>
+        </form>
+    </div>
+</div>
+<script>
+    function checkIfStarsSelected() {
+         if (!$('input[name="review-star"]:checked').length > 0) {
+            $('#stars-required').removeClass("invisible");
+        }else {
+             $('#stars-required').addClass("invisible");
+         }
+    }
+    $('input[name="review-star"]').on('change', function() {
+        checkIfStarsSelected();
+    });
+
+</script>

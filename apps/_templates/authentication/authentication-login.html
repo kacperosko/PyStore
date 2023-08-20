@@ -1,15 +1,15 @@
 {% extends "base/base.html" %}
 {% block title %} Log in {% endblock %}
-
+{% load static %}
 {% block content %}
-<div class="w-96 h-80 rounded-xl drop-shadow-xl bg-gray-50 dark:bg-gray-700 m-auto mt-14">
+<div class="w-96 h-fit rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark m-auto mt-14">
     <div class="p-3">
         <h1 class=" text-2xl text-lime font-bold w-full text-center">Hello again :)</h1>
         <div class="w-10/12 h-1 bg-gray-200 mx-auto rounded-xl my-6"></div>
         <div class="text-red-600 my-5 text-center">
             {{ message }}
         </div>
-         <form method="post" action="">
+         <form method="post" action="" class="">
              {% csrf_token %}
             <div class="w-full flex flex-col justify-center gap-6">
                 <input name="email" type="email" placeholder="email" class="py-1 px-3 w-10/12 bg-gray-50 dark:bg-gray-700 rounded-xl border-2 border-lime m-auto" required>
@@ -19,7 +19,14 @@
              <button type="submit" class="mt-10 cart-button z-50 px-5 active:mt-12">
                 <span class="text-white font-bold">Login</span>
             </button>
+
+{#             <div class="text-sm text-center text-gray-600">#}
+{#                 <div class="bg-gray-300 w-48 h-0.5 mt-4 mb-2 mx-auto rounded-2xl"></div>#}
+{#                 You don't have an account yet?<br>#}
+{#                 <a href="/register" class="text-lime underline">Register here :D</a>#}
+{#             </div>#}
          </form>
+
     </div>
 </div>
 {% endblock content %}

@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+{% block title %} Sign in {% endblock %}
+{% load static %}
+{% block content %}
+<div class="w-96 h-fit rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark m-auto mt-14 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div class="p-3">
+        <div class="">
+        <h1 class=" text-2xl text-lime font-bold w-full text-center">Your account is active!</h1>
+        <div class="w-10/12 h-1 bg-gray-200 mx-auto rounded-xl my-6"></div>
+        <p class="text-center text-dark-xl dark:text-white">So glad that You are with us :)</p>
+        <p class="text-center text-dark-xl dark:text-white mt-3">Don't hesitate and go at Your firsty shopping wohoo</p>
+        <button  onclick="location.href='/store';" type="submit" class="mt-5 cart-button z-50 px-5">
+            <span class="text-white font-bold">Go shopping!</span>
+        </button>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+    let duration = 11 * 1000;
+    let animationEnd = Date.now() + duration;
+    let defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    let interval = setInterval(function() {
+      let timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      let particleCount = 50 * (timeLeft / duration);
+      // since particles fall down, start a bit higher than random
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+    }, 250);
+    </script>
+{% endblock javascripts %}

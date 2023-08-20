@@ -1,0 +1,117 @@
+{% extends "base/base.html" %}
+{% block title %} {{ post.title }} {% endblock title %}
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+{% include 'includes/pages-steps.html' %}
+<div class="w-full flex justify-center">
+    <div class="w-2/5">
+        <img src="{{ post.post_image.url }}" class="w-full rounded-2xl mb-5 mx-auto" alt="">
+        <div class="font-bold text-2xl mx-auto text-center mb-5 dark:text-white">{{ post.title }}</div>
+        <div class="rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark p-6 mb-5">
+            <div class="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-5">
+                <div>Created on: {{ post.created_on|date:'Y-m-d' }}</div>
+                <div>Author: {{ post.author.get_full_name }}</div>
+            </div>
+            <div class="blog-post dark:text-white">
+                {% autoescape off %}
+                    {{ post.content }}
+                {% endautoescape %}
+            </div>
+        </div>
+
+        <div class="rounded-xl drop-shadow-xl bg-gray-50 dark:bg-light-dark p-6 mb-5">
+            <h1 class="dark:text-white font-bold text-2xl mb-6">Comments</h1>
+
+            {% if not comments %}
+                <div class="text-center">
+                    <p class="dark:text-white text-lg mb-6">Be the first who will comment ;D</p>
+                </div>
+            {% endif %}
+            <ul class="post-comment mb-10">
+                {% for c in comments %}
+                <li class="my-3">
+                    <div class="dark:text-white" id="comment-{{ c.id }}">
+                        <div class="flex justify-between">
+                            <div class="flex items-center">
+                                <div class="rounded-1/2 bg-orange-300 w-8 h-8 flex items-center justify-center overflow-hidden">
+                                    <p class="my-auto">{{ c.get_author_full_name|get_initials }}</p>
+{#                                    <img class="h-8" src="{{ post.post_image.url }}"> TODO After adding profile pictures for users include those here#}
+                                </div>
+                                <p class="font-bold ml-2">{{ c.get_author_full_name }}</p>
+                            </div>
+                            <div class="text-sm dark:text-gray-400">
+                                {{ c.created_on|date:'Y-m-d h:i'}}
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <p>
+                                {% autoescape off %}
+                                    {{ c.content }}
+                                {% endautoescape %}
+                            </p>
+                        </div>
+                        <input type="checkbox" id="like-{{ c.id }}" {% if c.liked_by_current_user %}checked{% endif %} class="hidden peer" required="">
+                        <label for="like-{{ c.id }}" onclick="LikeComment('{{ c.id }}')" class="peer-checked:bg-lime peer-checked:text-gray-50 border-2 border-lime w-fit px-2 py-1 rounded-2xl flex mt-3 cursor-pointer group transition duration-200">
+                            <img alt="thumb up" src="{% static '/icons/like.svg' %}" class="w-4 group-hover:scale-110 group-active:scale-75 transition duration-200">
+                            <p id="like-count-{{ c.id }}" class="ml-1 text-xs dark:text-white">{% if c.likes %}{{ c.likes }}{% endif %}</p>
+                        </label>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <form method="POST">
+            <h1 class="dark:text-white font-bold text-2xl mb-6">What do You think about this Post?</h1>
+            {% csrf_token %}
+                <div>
+                    <div class="">
+                    {% if user.is_authenticated %}
+                        <p>You're commenting as <b class="text-lime">{{ request.user.get_full_name }}</b></p>
+                    {% else %}
+                    <div class="flex justify-between relative">
+                        <div class="relative w-[calc(50%-0.5rem)]" data-te-input-wrapper-init>
+                            <input id="blog-comment-fname" name="first_name" type="text" placeholder="First Name"
+                                   class="peer leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 w-full focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.first_name }}" {% endif %}>
+                            <label
+                                for="blog-comment-fname"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-red-50 dark:bg-transparent px-2 peer-focus:px-2 peer-focus:text-lime peer-focus:dark:text-dark-lime peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                                >First Name
+                            </label>
+                        </div>
+                        <div class="relative w-[calc(50%-0.5rem)]"  data-te-input-wrapper-init>
+                            <input id="blog-comment-lname" name="last_name" type="text" placeholder="Last Name"
+                                   class="peer leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 w-full focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {% if user.is_authenticated %} bg-gray-300 dark:bg-gray-500{% endif %}" required {% if user.is_authenticated %}readonly value="{{ user.last_name }}" {% endif %}>
+                            <label
+                                for="blog-comment-lname"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-red-50 dark:bg-transparent px-2 peer-focus:px-2 peer-focus:text-lime peer-focus:dark:text-dark-lime peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                                >Last Name
+                            </label>
+                        </div>
+                    </div>
+                    {% endif %}
+                    </div>
+                    <textarea name="content" type="text" placeholder="Write something here..." class="mt-5 p-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required></textarea>
+                    <div class="text-center w-full">
+                        <button class="mx-auto w-fit" type="submit">
+                            <div class="bg-lime mt-6 rounded-xl dark:text-white text-white px-2 py-1 cursor-pointer hover:scale-110 active:scale-90 transition duration-200">
+                                <p>Add Comment</p>
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script src="{% static '/Typescript/_compiled/LikeComment.js' %}"></script>
+{% endblock javascripts %}

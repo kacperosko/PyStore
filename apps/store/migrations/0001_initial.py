@@ -3,6 +3,7 @@
 import apps.store.models
 from django.db import migrations, models
 import django.db.models.deletion
+from apps.models_handler.generate_file_directory import generate_product_path
 
 
 class Migration(migrations.Migration):
@@ -34,7 +35,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('description', models.CharField(max_length=255)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('image', models.FileField(upload_to=apps.store.models.file_directory_path)),
+                ('image', models.FileField(upload_to=generate_product_path)),
                 ('date_created', models.DateField(auto_now_add=True)),
                 ('is_active', models.BooleanField(default=True)),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product_category', to='store.category')),

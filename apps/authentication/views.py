@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from .models import UserManager
 from .forms import LoginForm, SignUpForm
 from django.template import RequestContext
 from django.core.mail import send_mail, BadHeaderError
@@ -14,6 +15,9 @@ from django.utils.encoding import force_bytes
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('/account')
+
     form = LoginForm(request.POST or None)
     message = ""
 
@@ -31,29 +35,55 @@ def login_view(request):
         else:
             message = 'Error during login'
 
-    return render(request, "authentication/login.html", {"form": form, "message": message})
+    return render(request, "authentication/authentication-login.html", {"form": form, "message": message})
 
 
 def register_user(request):
-    msg = None
-    success = False
+    error_msg = None
+
+    if request.user.is_authenticated:
+        return redirect('/account')
 
     if request.method == "POST":
         form = SignUpForm(request.POST)
+
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get("username")
+            email = form.cleaned_data.get("email")
+            first_name = form.cleaned_data.get("first_name")
+            last_name = form.cleaned_data.get("last_name")
+            phone = form.cleaned_data.get("phone")
             raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
 
-            msg = 'User created - please <a href="/login">login</a>.'
-            success = True
+            user = authenticate(email=email, password=raw_password, first_name=first_name, last_name=last_name,
+                                phone=phone)
 
-            # return redirect("/login/")
+            login(request, user)
+            request.session["new_registered_activating"] = True
+            request.session["new_registered_complete"] = True
+            return redirect("/register-activating")
 
         else:
-            msg = 'Form is not valid'
+            print(form.cleaned_data)
+            error_msg = form.errors
     else:
         form = SignUpForm()
 
-    return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+    return render(request, "authentication/authentication-register.html",
+                  {"form": form, "error_msg": error_msg})
+
+
+def register_complete(request):
+    if request.session.get("new_registered_complete", False):
+        del request.session["new_registered_complete"]
+        return render(request, "authentication/authentication-register-complete.html", {})
+    else:
+        return redirect("/")
+
+
+def register_activating(request):
+    if request.session.get("new_registered_activating", False):
+        del request.session["new_registered_activating"]
+        return render(request, "authentication/authentication-register-activating.html", {})
+    else:
+        return redirect("/")
