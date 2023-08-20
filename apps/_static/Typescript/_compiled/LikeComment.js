@@ -17,7 +17,7 @@ function LikeComment(comment_id) {
         error: function ($xhr, textStatus, errorThrown) {
             $('#like-' + comment_id).prop("checked", false);
             // @ts-ignore
-            Alert.error('Try again', 'Oh no we couldn\'t like this', { displayDuration: 4000, pos: 'top' });
+            Alert.error(JSON.parse($xhr.responseText).message, 'Oh no what a green mess!', { displayDuration: 5000, pos: 'top' });
         }
     });
 }

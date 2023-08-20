@@ -6,7 +6,7 @@ function LikeComment(comment_id): void {
         dataType: 'json',
         contentType: 'application/json; encode=UTF-8',
         beforeSend: function(jqXHR) {
-        jqXHR.setRequestHeader('X-CSRFToken', <string>$('input[name=csrfmiddlewaretoken]').val());
+            jqXHR.setRequestHeader('X-CSRFToken', <string>$('input[name=csrfmiddlewaretoken]').val());
         },
         data:{
             comment_id: comment_id,
@@ -19,9 +19,9 @@ function LikeComment(comment_id): void {
             $('#like-'+comment_id).prop( "checked", false );
             // @ts-ignore
             Alert.error(
-                'Try again',
-                'Oh no we couldn\'t like this',
-                {displayDuration: 4000, pos: 'top'})
+                JSON.parse($xhr.responseText).message,
+                'Oh no what a green mess!',
+                {displayDuration: 5000, pos: 'top'})
         }
      })
 }

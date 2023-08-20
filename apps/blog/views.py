@@ -10,7 +10,9 @@ from ..order.views import is_ajax
 def like_comment(request):
     context = {}
     if is_ajax(request) and request.method == "GET":
-        user_id = request.GET.get("user_id", None)
+        if not request.user.is_authenticated:
+            context['message'] = 'You must log in to like a comment'
+            return JsonResponse(context, status=401)
         comment_id = request.GET.get("comment_id", None)
         isliked = True if request.GET.get("isliked", None) == "true" else False
         try:
